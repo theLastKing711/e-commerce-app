@@ -1,4 +1,6 @@
 
+$action-button-outline: 4px;
+
 .carousel {
 
   width: 100%;
@@ -12,7 +14,7 @@
   z-index: 0;
 
   @media screen and (max-width: 768px) {
-    margin-bottom: 0px;
+    margin-bottom: 2rem;
     height: 250px;
   }
 
@@ -25,11 +27,11 @@
     position: absolute;
     top: 2px;
     // height: 250px;
-    height: 25%;
+    height: calc(40% - $action-button-outline);
     width: 80px;
 
     @media screen and (max-width: 768px) {
-      height: 100%;
+      height: calc(100% - $action-button-outline);
 
     }
 

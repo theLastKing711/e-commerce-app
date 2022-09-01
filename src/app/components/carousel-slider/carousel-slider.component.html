@@ -4,10 +4,10 @@
         class="carousel__item"
         [ngClass]="
           {
-          'carousel__item--active': isItemActive(activePhotoIndex, i),
-          'carousel__item--hidden': isItemHidden(activePhotoIndex, i, photos),
-          'carousel__item--next': isItemNext(activePhotoIndex, i, photos),
-          'carousel__item--prev': isItemPrevious(activePhotoIndex, i, photos)
+          'carousel__item--active': carouselPagination.isItemActive(activePhotoIndex, i),
+          'carousel__item--hidden': carouselPagination.isItemHidden(activePhotoIndex, i, photos),
+          'carousel__item--next': carouselPagination.isItemNext(activePhotoIndex, i, photos),
+          'carousel__item--prev': carouselPagination.isItemPrevious(activePhotoIndex, i, photos)
           }
         "
         >
@@ -24,7 +24,7 @@
 
     <button
       class="carousel__action-button carousel__action-button--prev-button"
-      (click)="lastActivePhotoIndex = activePhotoIndex ;activePhotoIndex = prev(activePhotoIndex, photos)"
+      (click)="lastActivePhotoIndex = activePhotoIndex ;activePhotoIndex = carouselPagination.prev(activePhotoIndex, photos)"
 
       >
       <i class="pi pi-chevron-left"></i>
@@ -35,7 +35,7 @@
     <button
       class="carousel__action-button carousel__action-button--next-button"
 
-      (click)="lastActivePhotoIndex = activePhotoIndex ;activePhotoIndex = next(activePhotoIndex, photos);"
+      (click)="lastActivePhotoIndex = activePhotoIndex ;activePhotoIndex = carouselPagination.next(activePhotoIndex, photos);"
 
       >
       <i class="pi pi-chevron-right"></i>

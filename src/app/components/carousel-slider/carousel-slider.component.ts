@@ -1,3 +1,5 @@
+import { ElementsManipulationService } from './../../shared/services/elements-manipulation.service';
+import { CarouselPaginationService } from './../../shared/services/carousel-pagination.service';
 import { AfterViewInit, Component, ElementRef, Input, OnInit, Renderer2, ViewChild } from '@angular/core';
 
 @Component({
@@ -17,68 +19,21 @@ export class CarouselSliderComponent implements OnInit, AfterViewInit {
   activePhotoIndex: number = 0;
   lastActivePhotoIndex: number = this.activePhotoIndex;
 
-  constructor(private renderer: Renderer2) { }
+  constructor(private renderer: Renderer2, public carouselPagination: CarouselPaginationService, public elementManiplation: ElementsManipulationService) { }
 
   @ViewChild("image") image!: ElementRef<HTMLElement>;
 
   @ViewChild("carousel") carousel!: ElementRef<HTMLElement>;
 
 
-  getElementHeight(element: ElementRef): number {
-
-    const elementHeight = element?.nativeElement?.offsetHeight;
-
-    return elementHeight;
-  }
-
-  getElementHeightInPx(element: ElementRef): string {
-
-    const elementHeight = element?.nativeElement?.offsetHeight;
-
-    return this.convertNumberToPx(elementHeight)
-  }
-
-
-  getElementWidth(element: ElementRef): number {
-    const imageWidth = element.nativeElement?.offsetWidth;
-
-    return imageWidth;
-  }
-
-  getElementWidthInPx(element: ElementRef): string {
-
-    const imageWidth = this.getElementWidth(element);
-
-    return this.convertNumberToPx(imageWidth);
-
-  }
-
-
-  getImageMarginBottom(ref: ElementRef): number {
-    const marginOffset =  -(ref.nativeElement.offsetHeight * (75 / 100))
-    return marginOffset;
-  }
-
-
-  getImageMarginBottomInPx(ref: ElementRef): string {
-    const imageBottomMargin = this.getImageMarginBottom(ref)
-
-    return this.convertNumberToPx(imageBottomMargin)
-
-  }
-
-  convertNumberToPx(value: number): string {
-    return value.toString() + "px"
-  }
-
   ngOnInit(): void {
 
   }
 
   ngAfterViewInit() {
-        const imageHeightInPx = this.getElementHeightInPx(this.image);
-        const imageWidth = this.getElementWidth(this.image);
-        const imageBottomOffseIntPx = this.getImageMarginBottomInPx(this.image);
+        const imageHeightInPx = this.elementManiplation.getElementHeightInPx(this.image);
+        const imageWidth = this.elementManiplation.getElementWidth(this.image);
+        const imageBottomOffseIntPx = this.elementManiplation.getelementMarginBottomInPx(this.image, 60);
 
         console.log("first image", imageHeightInPx)
 
@@ -94,9 +49,9 @@ export class CarouselSliderComponent implements OnInit, AfterViewInit {
         {
 
 
-          const imageHeightInPx = this.getElementHeightInPx(this.image);
-          const imageWidth = this.getElementWidth(this.image);
-          const imageBottomOffseIntPx = this.getImageMarginBottomInPx(this.image);
+          const imageHeightInPx = this.elementManiplation.getElementHeightInPx(this.image);
+          const imageWidth = this.elementManiplation.getElementWidth(this.image);
+          const imageBottomOffseIntPx = this.elementManiplation.getelementMarginBottomInPx(this.image, 60);
 
           console.log("first image", imageHeightInPx)
 
@@ -108,75 +63,15 @@ export class CarouselSliderComponent implements OnInit, AfterViewInit {
           }
           else
           {
-            this.renderer.setStyle(this.carousel.nativeElement, 'margin-bottom', "0px")
+            this.renderer.setStyle(this.carousel.nativeElement, 'margin-bottom', "2rem")
           }
 
         })
 
   }
 
-  next<T>(mainIndex: number, list: T[])
-  {
 
-    if(this.isLastItem(mainIndex, list))
-    {
-      return 0;
-    }
 
-    return mainIndex + 1;
-  }
-
-  prev<T>(mainIndex: number, list: T[])
-  {
-
-    if(this.isFirstItem(mainIndex))
-    {
-      return list.length - 1;
-    }
-
-    return mainIndex - 1;
-  }
-
-  isItemActive<T>(mainIndex: number, itemIndex: number)
-  {
-    return mainIndex == itemIndex;
-  }
-
-  isItemNext<T>(mainIndex: number, itemIndex: number, list: T[])
-  {
-    if(this.isFirstItem(itemIndex) && this.isLastItem(mainIndex, list) )
-      return true;
-
-    return (mainIndex + 1 == itemIndex)
-  }
-
-  isItemPrevious<T>(mainIndex: number, itemIndex: number, list: T[])
-  {
-
-    if(this.isLastItem(itemIndex, list) && this.isFirstItem(mainIndex))
-      return true;
-
-    return (mainIndex - 1) == itemIndex;
-  }
-
-  isItemHidden<T>(mainIndex: number, itemIndex: number, list: T[])
-  {
-    return ! this.isItemActive(mainIndex, itemIndex)
-        &&
-      ! this.isItemNext(mainIndex, itemIndex, list)
-      &&
-      ! this.isItemPrevious(mainIndex, itemIndex, list)
-  }
-
-  isLastItem<T>(itemIndex: number, list: T[])
-  {
-    return itemIndex == list.length - 1;
-  }
-
-  isFirstItem<T>(itemIndex: number)
-  {
-    return itemIndex == 0;
-  }
 
 
 }
