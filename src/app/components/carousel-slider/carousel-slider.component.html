@@ -1,0 +1,49 @@
+<div class="carousel  custom-container mx-auto px-4" #carousel>
+  <ul class="carousel__list">
+    <li *ngFor="let photo of photos; index as i"
+        class="carousel__item"
+        [ngClass]="
+          {
+          'carousel__item--active': isItemActive(activePhotoIndex, i),
+          'carousel__item--hidden': isItemHidden(activePhotoIndex, i, photos),
+          'carousel__item--next': isItemNext(activePhotoIndex, i, photos),
+          'carousel__item--prev': isItemPrevious(activePhotoIndex, i, photos)
+          }
+        "
+        >
+        <img [src]="photo" alt="img" class="carousel__image" #image />
+    </li>
+
+    <div class="carousel__item-layer" [ngStyle]="{'background-image': photos[lastActivePhotoIndex]}" >
+      <img [src]="photos[lastActivePhotoIndex]" />
+    </div>
+
+  </ul>
+
+  <div class="carousel__actions-container carousel__actions-container--left">
+
+    <button
+      class="carousel__action-button carousel__action-button--prev-button"
+      (click)="lastActivePhotoIndex = activePhotoIndex ;activePhotoIndex = prev(activePhotoIndex, photos)"
+
+      >
+      <i class="pi pi-chevron-left"></i>
+    </button>
+  </div>
+
+  <div class="carousel__actions-container carousel__actions-container--right">
+    <button
+      class="carousel__action-button carousel__action-button--next-button"
+
+      (click)="lastActivePhotoIndex = activePhotoIndex ;activePhotoIndex = next(activePhotoIndex, photos);"
+
+      >
+      <i class="pi pi-chevron-right"></i>
+    </button>
+  </div>
+
+
+
+</div>
+
+

@@ -1,0 +1,150 @@
+
+.carousel {
+
+  width: 100%;
+
+  min-height: auto;
+
+  position: relative;
+
+  overflow: hidden;
+  position: relative;
+  z-index: 0;
+
+  @media screen and (max-width: 768px) {
+    margin-bottom: 0px;
+    height: 250px;
+  }
+
+  &__image {
+    height: auto;
+  }
+
+  &__actions-container {
+    z-index: 4;
+    position: absolute;
+    top: 2px;
+    // height: 250px;
+    height: 25%;
+    width: 80px;
+
+    @media screen and (max-width: 768px) {
+      height: 100%;
+
+    }
+
+    &--right {
+      right: 2px;
+    }
+
+    &--left {
+      left: 2px;
+    }
+
+
+  }
+
+  &__action-button {
+
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+
+    text-decoration: none;
+    color: black;
+
+
+    i {
+      font-size: 2.5rem;
+
+      @media screen and (max-width: 768px) {
+        font-size: 1.5rem;
+      }
+
+    }
+
+    &--next-button {
+      right: 0;
+    }
+
+    &--prev-button {
+      left: 0;
+    }
+
+    border: none;
+    background-color: transparent;
+    &:focus {
+      border: 2px solid black;
+      outline: 2px solid lightblue;
+    }
+
+  }
+
+
+  &__item-layer {
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    z-index: 1;
+
+  }
+
+  &__list {
+    // position: relative;
+  }
+
+  &__item {
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+
+    transition: transform 0.15s;
+
+
+    &--active {
+      transform: translateX(0);
+      z-index: 2;
+      opacity: 1;
+      position: absolute;
+
+    }
+
+    &--hidden {
+      transform: translateX(0);
+      z-index: 0;
+      opacity: 0;
+    }
+
+    &--next {
+      transform: translateX(100%);
+      z-index: -1;
+      opacity: 0;
+    }
+
+    &--prev {
+      transform: translateX(-100%);
+      z-index: -1;
+      opacity: 0;
+    }
+
+  }
+
+}

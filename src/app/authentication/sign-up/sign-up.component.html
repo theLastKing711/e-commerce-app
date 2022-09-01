@@ -1,0 +1,47 @@
+<main>
+    <h1 class="mb-4">
+      E-commerce
+    </h1>
+    <form (ngSubmit)="signUp()" [formGroup]="signUpForm">
+        <p-card class="sign-up-form">
+
+          <ng-template pTemplate="header">
+            <h4>
+              Sign up to E-commerce
+            </h4>
+          </ng-template>
+
+
+            <div class="form-field  mb-4 ">
+              <input type="text" pInputText class="w-100 p-2" placeholder="username" formControlName="username">
+              <p *ngIf="hasRequiredError('username')" id="username-error" class="p-error" >
+                Username is Required
+              </p>
+            </div>
+
+            <div class="form-field mb-4">
+              <input type="text" pInputText class="w-100 p-2" placeholder="email" formControlName="email">
+              <p *ngIf="hasRequiredError('email')" id="email-error" class="p-error">
+                Email is Required
+              </p>
+            </div>
+
+            <div class="form-field mb-4">
+              <input type="password" pInputText class="w-100 p-2" placeholder="password" formControlName="password">
+              <p *ngIf="hasRequiredError('password')" id="password-error" class="p-error">
+                Password is Required
+              </p>
+            </div>
+
+
+          <ng-template pTemplate="footer">
+            <button pButton type="submit" label="Sign Up" class="sign-up-button" [disabled]="! formIsValid"></button>
+          </ng-template>
+
+      </p-card>
+    </form>
+
+    <p class="text-center mt-2">Already have an account?
+      <a [routerLink]="'/login'" class="login-link">Login</a>
+    </p>
+</main>

@@ -1,0 +1,36 @@
+
+
+:host {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+
+  h1 {
+    text-align: center;
+  }
+
+
+  ::ng-deep {
+
+    .p-card {
+      padding: 2rem 1rem;
+      width: 350px;
+      text-align: center;
+    }
+
+    .p-error {
+      text-align: left;
+    }
+  }
+
+  .sign-up-button {
+    width: 200px;
+  }
+
+  .login-link {
+    text-decoration: none;
+  }
+}
