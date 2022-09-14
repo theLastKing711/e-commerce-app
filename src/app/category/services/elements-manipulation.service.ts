@@ -43,7 +43,7 @@ export class ElementsManipulationService {
   }
 
 
-  getelementMarginBottomInPx(ref: ElementRef, value: number): string {
+  getElementMarginBottomInPx(ref: ElementRef, value: number): string {
     const imageBottomMargin = this.getelementMarginBottom(ref, value)
 
     return this.convertNumberToPx(imageBottomMargin)

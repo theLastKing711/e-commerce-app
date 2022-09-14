@@ -6,14 +6,12 @@
     </h2>
   </ng-template>
 
-
-
-    <a [routerLink]="'test'">
+    <a [routerLink]="['/categories', categoryId]">
      <img [src]="image" alt="category card image" >
     </a>
 
   <ng-template pTemplate="footer">
-    <a class="category-card__link">Shop now</a>
+    <a class="category-card__link" [routerLink]="['/categories', categoryId]">Shop now</a>
   </ng-template>
 
 </p-card>

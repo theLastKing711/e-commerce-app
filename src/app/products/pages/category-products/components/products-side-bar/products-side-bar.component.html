@@ -1,0 +1,77 @@
+
+<div class="product-filters">
+
+  <div class="rating-filter">
+
+    <ul class="rating-filter__list">
+
+      <span class="rating-filter__title">
+        Avg. Customer Review
+      </span>
+
+        <li *ngIf="isFilterSelected(selectedStarFilter)" class="rating-filter__item">
+
+          <a
+            class="rating-filter__item-link"
+            (click)="updateProductStarsFilter(-1)">
+            <i class="pi pi-chevron-left left-arrow"></i>
+            Clear
+          </a>
+
+        </li>
+
+        <li *ngFor="let star of starsFilterOptions" class="rating-filter__item">
+          <a
+            class="rating-filter__item-link"
+            (click)="updateProductStarsFilter(star)"
+            [ngClass]="
+              {
+                'rating-filter__item-link--active': isPriceFilterActive(star, selectedStarFilter)
+                }
+              "
+          >
+            <p-rating [ngModel]="star" [readonly]="true" [cancel]="false" class="rating-filter__stars"></p-rating>
+            <span class="rating-filter__stars-text">
+              & Up
+            </span>
+          </a>
+        </li>
+
+    </ul>
+
+  </div>
+
+  <div class="price-filter">
+    <ul>
+      <span class="price-filter__title">Price</span>
+
+      <li *ngIf="isFilterSelected(selectedPriceFilter.id)" class="price-filter__item">
+
+        <a
+          class="price-filter__item-link"
+          (click)="updateProductPriceFilter({id: -1, startValue: 1, endValue: 99999, sortType: 0})"
+        >
+        <i class="pi pi-chevron-left left-arrow"></i>
+          Clear
+        </a>
+
+      </li>
+
+      <li class="price-filter__item" *ngFor="let priceOption of priceFilterOptions">
+        <a
+          class="price-filter__item-link"
+          [ngClass]="
+          {
+          'price-filter__item-link--active': isPriceFilterActive(priceOption.price.id, selectedPriceFilter.id)
+          }
+        "
+          (click)="updateProductPriceFilter(priceOption.price)">
+          {{ priceOption.text }}
+        </a>
+      </li>
+    </ul>
+  </div>
+
+</div>
+
+

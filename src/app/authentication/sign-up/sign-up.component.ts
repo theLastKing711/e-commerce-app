@@ -18,7 +18,7 @@ export class SignUpComponent implements OnInit,OnDestroy {
 
   signUpForm  = this.fb.group({
     username: ['', Validators.required],
-    email: ['', Validators.required],
+    email: ['', [Validators.required, Validators.email]],
     password: ['', Validators.required]
   })
 
@@ -54,7 +54,6 @@ export class SignUpComponent implements OnInit,OnDestroy {
     signUpFormData.append('password', password);
 
 
-
     this.signUpSubscription =  this.authService.register(signUpFormData)
                                                   .subscribe(result => {
                                                     this.router.navigate(['/login'])
@@ -71,15 +70,32 @@ export class SignUpComponent implements OnInit,OnDestroy {
 
   }
 
+  hasEmailFormatError(key: string) {
+
+    return (! this.isEmpty(key))  && ( this.isEmailFormatInvalid(key)) &&  this.isTouched(key)
+
+  }
+
   isEmpty(key: string) {
     return this.signUpForm.get(key)?.value == "";
+  }
+
+  isTouched(key: string) {
+    return this.signUpForm.get(key)?.touched
   }
 
   isPristine(key: string) {
     return this.signUpForm.get(key)?.pristine;
   }
 
+  isEmailFormatInvalid(key: string) {
+
+    return this.signUpForm.get(key)?.errors?.['email']
+
+  }
+
   ngOnDestroy(): void {
+    if(this.signUpSubscription)
       this.signUpSubscription.unsubscribe();
   }
 

@@ -6,8 +6,12 @@
   margin: 0;
 }
 
+ul {
+  padding: 0 !important;
+}
+
 a {
-  text-decoration: none;
+  text-decoration: none !important;
 }
 
 img {

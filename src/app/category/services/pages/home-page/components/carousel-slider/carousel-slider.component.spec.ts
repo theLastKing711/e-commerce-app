@@ -1,0 +1,22 @@
+import { CarouselSliderComponent } from './carousel-slider.component';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+
+describe('CarouselSliderComponent', () => {
+  let component: CarouselSliderComponent;
+  let fixture: ComponentFixture<CarouselSliderComponent>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [ CarouselSliderComponent ]
+    })
+    .compileComponents();
+
+    fixture = TestBed.createComponent(CarouselSliderComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});

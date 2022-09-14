@@ -1,5 +1,5 @@
-import { ElementsManipulationService } from './../../shared/services/elements-manipulation.service';
-import { CarouselPaginationService } from './../../shared/services/carousel-pagination.service';
+import { ElementsManipulationService } from 'src/app/category/services/elements-manipulation.service';
+import { CarouselPaginationService } from 'src/app/category/services/carousel-pagination.service';
 import { AfterViewInit, Component, ElementRef, Input, OnInit, Renderer2, ViewChild } from '@angular/core';
 
 @Component({
@@ -7,7 +7,7 @@ import { AfterViewInit, Component, ElementRef, Input, OnInit, Renderer2, ViewChi
   templateUrl: './carousel-slider.component.html',
   styleUrls: ['./carousel-slider.component.scss']
 })
-export class CarouselSliderComponent implements OnInit, AfterViewInit {
+export class CarouselSliderComponent implements  AfterViewInit {
 
   @Input() photos: string [] = [];
 
@@ -25,15 +25,10 @@ export class CarouselSliderComponent implements OnInit, AfterViewInit {
 
   @ViewChild("carousel") carousel!: ElementRef<HTMLElement>;
 
-
-  ngOnInit(): void {
-
-  }
-
   ngAfterViewInit() {
         const imageHeightInPx = this.elementManiplation.getElementHeightInPx(this.image);
         const imageWidth = this.elementManiplation.getElementWidth(this.image);
-        const imageBottomOffseIntPx = this.elementManiplation.getelementMarginBottomInPx(this.image, 60);
+        const imageBottomOffseInPx = this.elementManiplation.getElementMarginBottomInPx(this.image, 60);
 
         console.log("first image", imageHeightInPx)
 
@@ -42,7 +37,7 @@ export class CarouselSliderComponent implements OnInit, AfterViewInit {
 
         if(imageWidth >= 768)
         {
-          this.renderer.setStyle(this.carousel.nativeElement, 'margin-bottom', imageBottomOffseIntPx)
+          this.renderer.setStyle(this.carousel.nativeElement, 'margin-bottom', imageBottomOffseInPx)
         }
 
         addEventListener('resize', () =>
@@ -51,7 +46,7 @@ export class CarouselSliderComponent implements OnInit, AfterViewInit {
 
           const imageHeightInPx = this.elementManiplation.getElementHeightInPx(this.image);
           const imageWidth = this.elementManiplation.getElementWidth(this.image);
-          const imageBottomOffseIntPx = this.elementManiplation.getelementMarginBottomInPx(this.image, 60);
+          const imageBottomOffseInPx = this.elementManiplation.getElementMarginBottomInPx(this.image, 60);
 
           console.log("first image", imageHeightInPx)
 
@@ -59,7 +54,7 @@ export class CarouselSliderComponent implements OnInit, AfterViewInit {
 
           if(imageWidth >= 768)
           {
-            this.renderer.setStyle(this.carousel.nativeElement, 'margin-bottom', imageBottomOffseIntPx)
+            this.renderer.setStyle(this.carousel.nativeElement, 'margin-bottom', imageBottomOffseInPx)
           }
           else
           {

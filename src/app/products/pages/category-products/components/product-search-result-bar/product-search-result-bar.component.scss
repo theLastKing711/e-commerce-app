@@ -1,0 +1,19 @@
+:host {
+  background-color: white;
+  border: 1px solid #d5d9d9;
+  border-radius: 6px;
+  padding: 0.875rem 1.125rem;
+  display: block;
+  margin: 1.25rem 0;
+
+}
+
+
+.product-search-result-bar {
+  &__pagination-title
+  {
+    font-size: 0.9rem;
+    padding: 0 1.25rem;
+    margin-bottom: 0;
+  }
+}

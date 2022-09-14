@@ -1,3 +1,5 @@
+import { CategoryState } from './category/store/category.state';
+import { ProductState } from './products/store/product.state';
 import { SharedModule } from './shared/shared.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -11,19 +13,13 @@ import {ButtonModule} from 'primeng/button';
 import { ReactiveFormsModule } from '@angular/forms';
 import {FileUploadModule} from 'primeng/fileupload';
 import { HttpClientModule } from '@angular/common/http';
-import { CategoryPreviewCardComponent } from './components/category-preview-card/category-preview-card.component';
-import { HomePageComponent } from './pages/home-page/home-page.component';
-import { CarouselSliderComponent } from './components/carousel-slider/carousel-slider.component';
-
+import { NgxsModule } from '@ngxs/store';
 
 @NgModule({
   declarations: [
     AppComponent,
     SignUpComponent,
     LoginComponent,
-    CategoryPreviewCardComponent,
-    HomePageComponent,
-    CarouselSliderComponent,
   ],
   imports: [
     BrowserModule,
@@ -33,7 +29,8 @@ import { CarouselSliderComponent } from './components/carousel-slider/carousel-s
     ButtonModule,
     ReactiveFormsModule,
     FileUploadModule,
-    SharedModule
+    SharedModule,
+    NgxsModule.forRoot([ProductState, CategoryState])
   ],
   providers: [],
   bootstrap: [AppComponent]

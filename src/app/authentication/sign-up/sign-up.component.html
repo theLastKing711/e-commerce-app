@@ -13,29 +13,39 @@
 
 
             <div class="form-field  mb-4 ">
-              <input type="text" pInputText class="w-100 p-2" placeholder="username" formControlName="username">
-              <p *ngIf="hasRequiredError('username')" id="username-error" class="p-error" >
+              <input type="text" pInputText class="w-100 p-2" placeholder="username" formControlName="username" test-id="username">
+              <p *ngIf="hasRequiredError('username')" id="username-error" class="p-error" test-id="username-required-error" >
                 Username is Required
               </p>
             </div>
 
             <div class="form-field mb-4">
-              <input type="text" pInputText class="w-100 p-2" placeholder="email" formControlName="email">
-              <p *ngIf="hasRequiredError('email')" id="email-error" class="p-error">
+              <input type="text" pInputText class="w-100 p-2" placeholder="email" formControlName="email" test-id="email">
+              <p *ngIf="hasRequiredError('email')" id="email-error" class="p-error" test-id="email-required-error">
                 Email is Required
+              </p>
+              <p *ngIf="hasEmailFormatError('email')" class="p-error" test-id="email-email-format-error">
+                Email Format is invalid
               </p>
             </div>
 
             <div class="form-field mb-4">
-              <input type="password" pInputText class="w-100 p-2" placeholder="password" formControlName="password">
-              <p *ngIf="hasRequiredError('password')" id="password-error" class="p-error">
+              <input type="password" pInputText class="w-100 p-2" placeholder="password" formControlName="password" test-id="password">
+              <p *ngIf="hasRequiredError('password')" id="password-error" class="p-error" test-id="password-required-error">
                 Password is Required
               </p>
             </div>
 
 
           <ng-template pTemplate="footer">
-            <button pButton type="submit" label="Sign Up" class="sign-up-button" [disabled]="! formIsValid"></button>
+            <button
+              pButton type="submit"
+              label="Sign Up"
+              class="sign-up-button"
+              [disabled]="! formIsValid"
+              test-id="submit-button"
+            >
+            </button>
           </ng-template>
 
       </p-card>

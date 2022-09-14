@@ -1,0 +1,12 @@
+
+<div class="product-search-result-bar">
+
+  <div class="product-search-result-bar__pagination-data">
+    <h2 class="product-search-result-bar__pagination-title">
+      {{ pagination.pageNumber }}-{{ calculatePageEnd(pagination.pageNumber, pagination.pageSize, totalCount) }}
+        of
+      {{ calculateTotalCount(pagination.pageNumber,pagination.pageSize, totalCount)}} results
+    </h2>
+  </div>
+
+</div>

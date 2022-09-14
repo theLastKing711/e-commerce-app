@@ -9,7 +9,7 @@ export class CategoryPreviewCardComponent implements OnInit {
 
   @Input() title!: string;
   @Input() image!: string;
-
+  @Input() categoryId!: number;
 
 
   constructor() { }
