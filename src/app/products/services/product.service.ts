@@ -69,7 +69,6 @@ export class ProductService {
 
 
   public getCategoryProducts(categoryId: number,
-                             pagination: IPagination,
                             filter: IProductFilter
                             ): Observable<IPaginatedData<IProduct>>
   {
@@ -78,8 +77,8 @@ export class ProductService {
 
     let params = new HttpParams();
 
-    params = params.set('pageNumber', pagination.pageNumber)
-                     .set('pageSize', pagination.pageSize);
+    params = params.set('pageNumber', filter.pagination.pageNumber)
+                   .set('pageSize', filter.pagination.pageSize);
 
 
 

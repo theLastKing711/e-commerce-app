@@ -6,13 +6,15 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
 import { CategoryPreviewCardComponent } from './pages/home-page/components/category-preview-card/category-preview-card.component';
 import { ProductsRoutingModule } from './category.routing.module';
 import {CarouselModule} from 'primeng/carousel';
+import { CategoryCarouselComponent } from './pages/home-page/components/category-carousel/category-carousel.component';
 
 
 @NgModule({
   declarations: [
                   HomePageComponent,
                   CategoryPreviewCardComponent,
-                  CarouselSliderComponent
+                  CarouselSliderComponent,
+                  CategoryCarouselComponent
                 ],
   imports: [
     CommonModule,

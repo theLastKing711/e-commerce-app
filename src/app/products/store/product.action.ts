@@ -8,10 +8,17 @@ import { IProductFilter } from './../product.type';
       constructor(public payload: {filter: T, filterValue: IProductFilter[T] }){}
     }
 
+    export class UpdateProductPagination {
+      static readonly type = '[Product Update Pagination]';
+
+      constructor(public payload: number) {}
+
+    }
+
     export class GetCategoryProducts {
       static readonly type = '[Product Get category products filtered by stars]';
 
-      constructor(public payload: number, public pagination: IPagination, public filter: IProductFilter){}
+      constructor(public payload: number, public filter: IProductFilter){}
     }
 
     export class ResetCategoryProducts {

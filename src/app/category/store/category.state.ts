@@ -1,4 +1,5 @@
-import { GetCategories } from './product.action';
+import { IProduct } from './../../products/product.type';
+import { GetCategories, GetCategoryTopSellersProducts } from './category.action';
 import { CategoryService } from './../services/category.service';
 import { ICategory } from './../category.type';
     import { tap } from 'rxjs';
@@ -6,14 +7,16 @@ import { ICategory } from './../category.type';
     import { Injectable } from '@angular/core';
 
     export class CategoryStateModel {
-        Categories!: ICategory[]
+        Categories!: ICategory[];
+        TopSellerProducts!: IProduct[]
 
     }
 
     @State<CategoryStateModel>({
         name: 'categories',
         defaults: {
-          Categories: []
+          Categories: [],
+          TopSellerProducts: []
         }
     })
 
@@ -29,8 +32,13 @@ import { ICategory } from './../category.type';
             return state.Categories;
         }
 
+        @Selector()
+        static getTopSellerCategoryProducts(state: CategoryStateModel) {
+            return state.TopSellerProducts;
+        }
+
         @Action(GetCategories)
-        GetCategories({getState, patchState}: StateContext<CategoryStateModel>)
+        getCategories({getState, patchState}: StateContext<CategoryStateModel>)
         {
 
           return this.categoryService.getCategories()
@@ -42,6 +50,26 @@ import { ICategory } from './../category.type';
                                 patchState({
                                   ...state, Categories: [...data]
                                 })
+                              })
+                             )
+        }
+
+        @Action(GetCategoryTopSellersProducts)
+        getCategoryTopSellersProducts({getState, patchState}: StateContext<CategoryStateModel>, { id } :GetCategoryTopSellersProducts)
+        {
+
+          return this.categoryService.getCategoryTopSellersProducts(id)
+                             .pipe(
+                              tap(data => {
+
+                                console.log("data", data)
+
+                                const state = getState();
+                                console.log("state", state)
+                                patchState({
+                                  ...state, TopSellerProducts: [...data]
+                                })
+                                console.log("new state", state)
                               })
                              )
         }

@@ -1,3 +1,4 @@
+import { IPagination } from './../shared/shared.type';
 interface IProductBase {
   id: number;
   price: number;
@@ -15,6 +16,7 @@ export interface IProduct extends IProductBase {
 
 export interface IProductFilter {
 
+  pagination: IPagination;
   price: IProductPriceFilter;
   stars: number;
 

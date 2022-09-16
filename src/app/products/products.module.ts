@@ -10,6 +10,7 @@ import { ProductCardComponent } from './pages/category-products/components/produ
 import { FormsModule } from '@angular/forms';
 import { ProductsSideBarComponent } from './pages/category-products/components/products-side-bar/products-side-bar.component';
 import { ProductSearchResultBarComponent } from './pages/category-products/components/product-search-result-bar/product-search-result-bar.component';
+import {PaginatorModule} from 'primeng/paginator';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { ProductSearchResultBarComponent } from './pages/category-products/compo
     CardModule,
     RatingModule,
     FormsModule,
-    SharedModule
+    SharedModule,
+    PaginatorModule
 
   ]
 })

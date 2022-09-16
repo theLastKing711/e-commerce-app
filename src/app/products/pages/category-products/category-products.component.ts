@@ -1,6 +1,6 @@
 import { IPaginatedData, IPagination } from './../../../shared/shared.type';
-import { UpdateFilter, GetCategoryProducts, ResetCategoryProducts, ResetCategoryProductsFilter } from './../../store/product.action';
-import { combineLatest, Observable, map, Subscription } from 'rxjs';
+import { UpdateFilter, GetCategoryProducts, ResetCategoryProducts, ResetCategoryProductsFilter, UpdateProductPagination } from './../../store/product.action';
+import { combineLatest, Observable, map, Subscription, filter } from 'rxjs';
 import { ProductState } from '../../store/product.state';
 import { IProduct, IProductFilter, IProductPrice, SortType, IProductPriceFilter } from './../../product.type';
 import { Component, OnInit, OnDestroy } from '@angular/core';
@@ -28,13 +28,8 @@ export class CategoryProductsComponent implements OnInit, OnDestroy{
 
   @Select(ProductState.getProductList) productsList$!: Observable<IPaginatedData<IProduct>>;
   @Select(ProductState.getFilter) productFilters$!: Observable<IProductFilter>;
-  @Select(ProductState.getPagination) pagination$!: Observable<IPagination>;
 
-  constructor( private store: Store, private route: ActivatedRoute) {
-
-
-
-   }
+  constructor( private store: Store, private route: ActivatedRoute) {}
 
 
   ngOnInit(): void {
@@ -44,18 +39,16 @@ export class CategoryProductsComponent implements OnInit, OnDestroy{
     this.routerSubscription = this.route.params.subscribe(params => {
       this.id = params['id']
 
-      this.productsSubscription = combineLatest([this.pagination$, this.productFilters$]).pipe(
+      this.productsSubscription = combineLatest([ this.productFilters$]).pipe(
 
-        map(([pagination, filter]) => {
+        map(([filter]) => {
 
-
+          console.log("third")
 
           this.store.dispatch(new GetCategoryProducts(
             this.id,
-            pagination,
             filter
           ))
-
 
         })
       ).subscribe(res => {
@@ -66,9 +59,22 @@ export class CategoryProductsComponent implements OnInit, OnDestroy{
 
   }
 
-  UpdateProductFilter<T extends keyof IProductFilter>(filter: T, filterValue: IProductFilter[T])
+  updateProductFilter<T extends keyof IProductFilter>(filter: T, filterValue: IProductFilter[T])
   {
     this.store.dispatch(new UpdateFilter({filter, filterValue}))
+  }
+
+  updateProductPaginationPage(pageNumber: number)
+  {
+    this.store.dispatch(new UpdateProductPagination(pageNumber))
+  }
+
+  onProductsPageChange(event: number): void
+  {
+    const pageNumber = event + 1;
+
+    this.updateProductPaginationPage(pageNumber)
+
   }
 
   ngOnDestroy(): void {

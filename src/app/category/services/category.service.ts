@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ICategory } from '../category.type';
 import { environment } from 'src/environments/environment';
+import { IProduct } from 'src/app/products/product.type';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +18,13 @@ export class CategoryService {
 
     return this.httpClient.get<ICategory[]>(this.categoryApiUrl);
 
+  }
+
+  getCategoryTopSellersProducts(id: number): Observable<IProduct[]> {
+
+    const topSellerProductsInCategory = `${this.categoryApiUrl}/${id}/products/bestSeller`
+
+    return this.httpClient.get<IProduct[]>(topSellerProductsInCategory);
   }
 
 

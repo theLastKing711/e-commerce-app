@@ -7,8 +7,8 @@
     <app-products-side-bar
         [starsFilterOptions]="starsFilterOptions"
         [priceFilterOptions]="priceFilterOptions"
-        (updatePriceFilter)="UpdateProductFilter('price', $event)"
-        (updateStarsFilter)="UpdateProductFilter('stars', $event)"
+        (updatePriceFilter)="updateProductFilter('price', $event)"
+        (updateStarsFilter)="updateProductFilter('stars', $event)"
         [selectedPriceFilter]="(productFilters$ | async )?.price!"
         [selectedStarFilter]="(productFilters$ | async)?.stars!"
     >
@@ -20,7 +20,7 @@
       <h2 class="products-content__results-title">Results</h2>
 
       <app-product-search-result-bar
-            [pagination]="(pagination$ | async) || { pageNumber: 1, pageSize: 12}"
+            [pagination]="(productFilters$ | async)?.pagination || { pageNumber: 1, pageSize: 5}"
             [totalCount]="(productsList$ | async)?.totalCount || 0"
       >
       </app-product-search-result-bar>
@@ -32,7 +32,20 @@
           </article>
 
         </div>
-    </div>
+      </div>
+
+      <div class="custom-pagination d-flex justify-content-center mt-2">
+        <app-custom-prime-paginator
+            [rows]="(productsList$ | async)?.data?.length!"
+            [totalRecords]="(productsList$ | async)?.totalCount!"
+            [pageNumber]="(productFilters$ | async)?.pagination?.pageNumber!"
+            (onPageChange)="onProductsPageChange($event)"
+
+        >
+        </app-custom-prime-paginator>
+      </div>
+
+
   </section>
 
 </main>

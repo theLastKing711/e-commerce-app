@@ -1,0 +1,25 @@
+
+
+<p-carousel [value]="products" [numVisible]="4" [numScroll]="1" class="categories-carousel" [responsiveOptions]="responsiveOptions">
+
+
+  <ng-template pTemplate="header">
+      <h5 class="categories-carousel__title">Top Selling {{ categoryTitle }}</h5>
+  </ng-template>
+
+  <ng-template let-product pTemplate="item">
+    <div class="categories-carousel__image-container">
+      <a class="categories-carousel__image-link">
+        <img [src]="product.path" [alt]="product.name" class="categories-carousel__image" />
+      </a>
+    </div>
+    <div class="categories-carousel__content">
+      <h5 class="categories-carousel__content-title mt-2">
+        {{ product.name }}
+      </h5>
+      <div class="categories-carousel_content-price mt-2">
+        ${{ product.price }}
+      </div>
+    </div>
+  </ng-template>
+</p-carousel>

@@ -2,17 +2,18 @@ import { defaultPagination, defaultProductsFilter } from './../product.constants
 import { IPaginatedData, IPagination } from './../../shared/shared.type';
 import { filter, tap } from 'rxjs';
 import { ProductService } from './../services/product.service';
-import { UpdateFilter, GetCategoryProducts, ResetCategoryProducts, ResetCategoryProductsFilter } from './product.action';
-import { IProductFilter, IProductPriceFilter, SortType } from './../product.type';
+import { UpdateFilter, GetCategoryProducts, ResetCategoryProducts, ResetCategoryProductsFilter, UpdateProductPagination } from './product.action';
+import { IProductFilter } from './../product.type';
 import { IProduct } from '../product.type';
 
 
     import { State, Selector, Action, StateContext } from '@ngxs/store';
     // import { AddProduct, UpdateProduct, DeleteProduct, SetSelectedProduct } from '../actions/user.action';
     import { Injectable } from '@angular/core';
-import { priceFilterOptions, products } from '../product.constants';
+import {products } from '../product.constants';
 
     export class ProductStateModel {
+
         Products!: IPaginatedData<IProduct>;
         Filter!: IProductFilter;
         Pagination!: IPagination
@@ -61,7 +62,7 @@ import { priceFilterOptions, products } from '../product.constants';
 
             setState({
                 ...state,
-                Filter: {...state.Filter, [filter]: filterValue}
+                Filter: {...state.Filter, [filter]: filterValue, pagination: {...defaultPagination} }
             });
 
             console.log("state", getState())
@@ -70,32 +71,43 @@ import { priceFilterOptions, products } from '../product.constants';
 
         }
 
+        @Action(UpdateProductPagination)
+        updateProductPagination<T extends keyof IProductFilter>({getState, setState}: StateContext<ProductStateModel>, { payload }: UpdateProductPagination) {
+
+            const state = getState();
+
+            setState({
+                ...state,
+                Filter: {...state.Filter, pagination: {...state.Pagination, pageNumber: payload} }
+            });
+
+            return;
+
+        }
+
+
         @Action(GetCategoryProducts)
-        getCategoryProducts({getState, patchState}: StateContext<ProductStateModel>, { payload, pagination, filter }: GetCategoryProducts)
+        getCategoryProducts({getState, patchState}: StateContext<ProductStateModel>, { payload, filter }: GetCategoryProducts)
         {
 
-          console.log("paginatin", pagination)
-          console.log("filter", filter)
-
-          return this.productService.getCategoryProducts(payload, pagination, filter)
+          return this.productService.getCategoryProducts(payload, filter)
                                     .pipe(
                                       tap(data => {
 
                                         const state = getState();
-                                        console.log("state", state)
-
-                                        console.log("data", [...data.data])
 
                                         patchState({
-                                          ...state, Products: {...data, data: [...data.data]}
+                                          ...state, Products: {...data, data: [...data.data]},
                                         })
                                       })
                                     )
+
         }
 
         @Action(ResetCategoryProducts)
         resetCategoryProducts({getState, patchState}: StateContext<ProductStateModel>)
         {
+
           const state = getState();
 
           patchState({...state, Products: {...products} })

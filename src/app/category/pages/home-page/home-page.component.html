@@ -15,3 +15,12 @@
 
 
 </section>
+
+
+<section class="top-seller-category-products custom custom-container mx-auto" *ngIf="(topSellerCategoryProducts$ | async)?.length! > 0">
+    <app-category-carousel
+        categoryTitle="Electronics"
+        [products]="(topSellerCategoryProducts$ | async)!"
+    >
+    </app-category-carousel>
+</section>

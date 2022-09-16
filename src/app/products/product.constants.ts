@@ -2,7 +2,7 @@ import { IPaginatedData, IPagination } from './../shared/shared.type';
 import { IProduct, IProductPrice, IProductPriceFilter, SortType } from './product.type';
 export const products: IPaginatedData<IProduct> = {
   pageNumber: 1,
-  pageSize: 12,
+  pageSize: 5,
   totalCount: 0,
   data:
       [
@@ -112,11 +112,15 @@ export const priceFilterOptions: IProductPrice[] = [
 
 export const defaultPagination: IPagination = {
   pageNumber: 1,
-  pageSize: 12
+  pageSize: 5
 }
 
 
 export const defaultProductsFilter = {
+  pagination: {
+    pageNumber: 1,
+    pageSize: 5
+  },
   price: {
     id: -1,
     startValue: 1,
