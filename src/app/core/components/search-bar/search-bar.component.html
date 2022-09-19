@@ -1,0 +1,39 @@
+
+
+<div class="search-input-overlay" *ngIf="isInputFocused">
+
+</div>
+
+<div class="search-input">
+  <input
+    type="search"
+    title="search"
+    class="search-input__text"
+    (focus)="onInputFocused()"
+    (blur)="onInputBlured()"
+    (input)="onSearchInputChanged($event)"
+    #searchInput
+
+  />
+
+  <div class="search-input__button-container">
+    <input type="button" class="search-input__button"/>
+    <i class="pi pi-search search-input__search-icon"></i>
+  </div>
+
+  <div class="search-result" (focus)="onInputFocused()">
+    <ul class="search-result__list">
+      <li *ngFor="let item of searchList" class="search-result__item">
+        <a class="search-result__item-link" (click)="onProductLinkClicked(item.categoryId, item.id)">
+          {{ item.name}}
+        </a>
+      </li>
+    </ul>
+  </div>
+
+
+
+</div>
+
+
+

@@ -1,5 +1,7 @@
+import { SharedState } from './shared/store/shared.state';
+import { CoreModule } from './core/core.module';
 import { CategoryState } from './category/store/category.state';
-import { ProductState } from './products/store/product.state';
+import { ProductState } from './product/store/product.state';
 import { SharedModule } from './shared/shared.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -14,6 +16,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import {FileUploadModule} from 'primeng/fileupload';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxsModule } from '@ngxs/store';
+import { NgxsStoragePluginModule } from '@ngxs/storage-plugin';
 
 @NgModule({
   declarations: [
@@ -30,7 +33,11 @@ import { NgxsModule } from '@ngxs/store';
     ReactiveFormsModule,
     FileUploadModule,
     SharedModule,
-    NgxsModule.forRoot([ProductState, CategoryState])
+    CoreModule,
+    NgxsModule.forRoot([ProductState, CategoryState, SharedState]),
+    NgxsStoragePluginModule.forRoot({
+      key: 'shared.ProductsCart.productInvoiceDetails'
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,40 @@
+:host {
+  display: block;
+  padding: 1.75rem 1.1rem 1.1rem;
+
+  * {
+    margin: 0;
+  }
+
+  ::ng-deep {
+    .p-card {
+      padding: 1.5rem 1rem;
+    }
+
+    .p-card-content {
+      padding: 0;
+    }
+    .p-card-body {
+      padding: 0;
+    }
+  }
+
+}
+
+
+.shopping-card {
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-bottom: 1px solid #DDD;
+  }
+
+  &__title {
+    font-size: 1.75rem;
+    color: black;
+    padding-bottom: 0.5rem;
+  }
+
+
+}

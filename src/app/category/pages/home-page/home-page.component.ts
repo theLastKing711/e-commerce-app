@@ -1,4 +1,4 @@
-import { IProduct } from './../../../products/product.type';
+import { IProduct } from '../../../product/product.type';
 import { GetCategoryTopSellersProducts } from './../../store/category.action';
 import { ICategory } from './../../category.type';
 import { Observable } from 'rxjs';

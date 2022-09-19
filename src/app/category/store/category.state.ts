@@ -1,4 +1,4 @@
-import { IProduct } from './../../products/product.type';
+import { IProduct } from '../../product/product.type';
 import { GetCategories, GetCategoryTopSellersProducts } from './category.action';
 import { CategoryService } from './../services/category.service';
 import { ICategory } from './../category.type';

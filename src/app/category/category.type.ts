@@ -5,3 +5,8 @@ export interface ICategory {
   path: string;
 
 }
+
+export interface ICategoryItem {
+  id: number;
+  name: string;
+}

@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ICategory } from '../category.type';
 import { environment } from 'src/environments/environment';
-import { IProduct } from 'src/app/products/product.type';
+import { IProduct } from 'src/app/product/product.type';
 
 @Injectable({
   providedIn: 'root'

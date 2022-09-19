@@ -1,5 +1,3 @@
-import { ProductsModule } from './products/products.module';
-import { HomePageComponent } from './category/pages/home-page/home-page.component';
 import { LoginComponent } from './authentication/login/login.component';
 import { SignUpComponent } from './authentication/sign-up/sign-up.component';
 import { NgModule } from '@angular/core';
@@ -24,7 +22,7 @@ const routes: Routes = [
   },
   {
     path: 'categories',
-    loadChildren: () => import('./products/products.module').then(m => m.ProductsModule),
+    loadChildren: () => import('./product/product.module').then(m => m.ProductsModule),
   }
   // {
   //   path: 'users',

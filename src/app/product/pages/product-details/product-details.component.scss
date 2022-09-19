@@ -1,0 +1,145 @@
+
+
+
+:host {
+
+
+  ::ng-deep {
+
+
+    .p-rating-icon {
+      color: rgb(230, 122, 0) !important;
+      font-size: 1rem;
+      margin-left: 0.1rem;
+    }
+
+    .ngxImageZoomContainer {
+      height: auto !important;
+      width: auto !important;
+    }
+
+    .p-inputnumber-button
+    {
+      background-color: #FFD814;
+      border-color: #FCD200;
+
+      &:hover {
+        background-color: #F7CA00 !important;
+      }
+
+      &:focus {
+        border-color: #F7CA00 !important;
+      }
+
+    }
+
+    .p-inputnumber-input {
+      text-align: center;
+      font-size: 1.2rem;
+    }
+
+  }
+
+
+}
+
+
+
+.product-details-description {
+
+  display: flex;
+  align-items: flex-start;
+
+  gap: 2rem;
+
+  > * {
+    flex: 1;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+    line-height: 32px;
+    margin-bottom: 0.25rem;
+  }
+
+  &__main-details {
+    border-bottom: 1px solid #e7e7e7;
+  }
+
+  &__reviews {
+  }
+
+  &__image {
+    // width: 700px;
+    // height: 700px;
+    object-fit: contain;
+  }
+
+  &__image-container {
+    position: -webkit-sticky;
+
+    position: sticky;
+    padding-left: 1.1rem;
+    top: 0.875rem;
+  }
+
+  &__quantity {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+  }
+
+  &__pricing {
+
+  }
+
+  &__add-to-cart-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+
+  }
+
+  &__add-to-cart-button {
+    padding: 1rem 3rem;
+  }
+
+  &__main-price {
+
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+
+  &__main-price-value{
+    font-size: 1.125rem;
+    color: #B12704;
+  }
+
+  &__main-price-title {
+    font-size: 0.875rem;
+    color: #565959;
+    display: inline-block;
+    // padding-bottom: 0.5rem;
+  }
+
+  &__about-title {
+    font-size: 1.3rem;
+  }
+
+  &__about-list {
+    list-style-type: initial;
+    padding-left: 1rem !important;
+    margin: 0;
+  }
+
+}
+
+
+.product-details-section {
+  margin-bottom: 0.875rem;
+  margin-top: 0;
+  padding-bottom: 0.25rem;
+  border-bottom: 1px solid #e7e7e7;
+}
+

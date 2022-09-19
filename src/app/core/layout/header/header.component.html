@@ -1,0 +1,40 @@
+<header class="main-header">
+
+  <nav class="nav-belt">
+    <div class="nav-belt__left">
+      <a class="nav-belt__left-site-title nav-item">
+        E-commerce
+      </a>
+    </div>
+
+    <div class="nav-belt__fill">
+        <app-search-bar
+          [searchList]="(searchList$ | async)!"
+          (searchInputBlurred)="onSearchInputBlurred($event)"
+          (searchTermChanged)="onSearchTermChanged($event)"
+          (searchInputFocuesed)="onSearchInputFocused($event)"
+          (ItemLinkClicked)="onSearchLinkClicked($event)"
+          >
+        </app-search-bar>
+    </div>
+
+    <div class="nav-belt__right">
+
+      <div class="nav-belt__right-auth nav-item">
+        <div class="nav-belt__right-auth h-100">
+          <a class="nav-belt__sign-in-link h-100 d-flex align-items-center" >Sign In</a>
+        </div>
+      </div>
+
+      <a class="nav-belt__right-shopping nav-item" [routerLink]="['/categories/shopping-cart']">
+        <span class="nav-belt__right-shopping-count">
+          {{ (cartItemsCount$ | async) }}
+        </span>
+        <i class="pi pi-shopping-cart nav-belt__right-shopping-icon"></i>
+      </a>
+
+    </div>
+  </nav>
+
+
+</header>

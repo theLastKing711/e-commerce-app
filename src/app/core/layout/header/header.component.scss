@@ -1,0 +1,83 @@
+:host {
+  display: block;
+  background-color: #131921;
+  // height: 3.75rem;
+}
+
+.main-header {
+  padding: 0.25rem 1rem;
+
+  @media screen and (max-width: 1100px) {
+    padding: 0.25rem 0.125rem;
+  }
+
+}
+
+.nav-belt {
+  padding-left: 0.125rem;
+  display: flex;
+  color: rgb(231, 79, 79);
+
+  &__left-site-title {
+    color: white;
+    font-size: 1.1rem;
+  }
+
+  &__fill {
+    flex: 1;
+  }
+
+  &__right {
+    display: flex;
+    align-items: center;
+  }
+
+  &__sign-in-link {
+    color: white;
+    cursor: pointer;
+  }
+
+
+  &__right-shopping {
+    display: flex;
+    position: relative;
+  }
+
+
+  &__right-shopping-icon
+  {
+    color: white;
+    font-size: 1.875rem;
+  }
+
+  &__right-shopping-count {
+    position: absolute;
+    top: -2px;
+    left: 56%;
+    transform: translateX(-56%);
+    color: #f08804;
+  }
+
+
+}
+
+
+.nav-item {
+
+  padding: 0 0.875rem 0;
+
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  border-radius: 3px;
+  border: 1px solid transparent;
+
+  transition: border-color 0.2s;
+
+  &:hover {
+    border: 1px solid white;
+  }
+
+
+}
