@@ -61,6 +61,7 @@ export interface IProductInvoice {
 export interface IProductInvoiceDetails {
 
   id: number;
+  name: string;
   categoryId: number;
   productQuantity: number;
   price: number;
@@ -75,4 +76,8 @@ export interface IProductItem {
   categoryId: number;
   name: string;
 
+}
+
+export interface IProductCartItem extends IProduct {
+  productQuantity: number;
 }

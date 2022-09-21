@@ -36,7 +36,6 @@ export class CategoryCarouselComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log("productssss", this.products)
   }
 
 

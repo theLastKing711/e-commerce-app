@@ -53,6 +53,7 @@ export class ProductDetailsComponent implements OnInit {
       id: product.id,
       categoryId: product.categoryId,
       productQuantity: quantity,
+      name: product.name,
       path: product.path,
       price: product.price
     };

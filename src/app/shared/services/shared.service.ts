@@ -12,6 +12,8 @@ export class SharedService {
 
   private apiStatsUrl: string = `${environment.base_url}stats`;
 
+  private productsUrl  = `${environment.base_url}AppUserProducts`;
+
   constructor(private httpClient: HttpClient) { }
 
   searchItems(query: string): Observable<{productListDto: IProduct[]}>
@@ -23,6 +25,14 @@ export class SharedService {
 
     return this.httpClient.get<{productListDto: IProduct[]}>(searchApiUrl, {params: queryParams})
 
+  }
+
+  getProductsUsingIds(ids: number[]): Observable<IProduct[]>
+  {
+
+    const productsUsingIdUrl = `${this.productsUrl}/getUsingIds`
+
+    return this.httpClient.post<IProduct[]>(productsUsingIdUrl, ids);
   }
 
 }

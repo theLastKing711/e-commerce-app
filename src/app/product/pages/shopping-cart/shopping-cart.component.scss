@@ -1,3 +1,5 @@
+$column-on-mobile-break-point: 900px;
+
 :host {
   display: block;
   padding: 1.75rem 1.1rem 1.1rem;
@@ -17,10 +19,35 @@
     .p-card-body {
       padding: 0;
     }
+
+    .p-card-footer {
+      padding: 0.25rem;
+    }
   }
 
 }
 
+
+.row {
+  @media screen and (max-width: $column-on-mobile-break-point) {
+    flex-direction: column;
+  }
+}
+
+.first {
+  flex: 1;
+}
+
+.second {
+  flex: 0 0 18.75rem;
+
+  @media screen and (max-width: $column-on-mobile-break-point) {
+      flex: 1;
+      margin-top: 1rem;
+
+  }
+
+}
 
 .shopping-card {
   &__header {
@@ -36,5 +63,44 @@
     padding-bottom: 0.5rem;
   }
 
+  &__footer {
+    display: flex;
+    justify-content: flex-end;
+    margin: 0;
+    padding: 0;
+  }
+
+  &__footer-total-pricing {
+    color: #0F1111;
+    font-size: 1.125rem;
+  }
+
+  &__footer-price {
+    font-weight: bold;
+  }
+
+  &__checkout-button {
+    margin-top: 0.5rem;
+    display: block;
+    width: 100%;
+    border-radius: 1000px;
+    padding: 0.3rem 0.6rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+    background-color: #FFD814;
+    border: 1px solid #FCD200;
+    box-shadow: 0 2px 5px 0 rgba(213,217,217,.5);
+    outline: none;
+
+    &:hover {
+      background-color: #F7CA00;
+    }
+
+    &:focus {
+      background-color: white;
+    }
+  }
 
 }

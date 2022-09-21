@@ -1,3 +1,4 @@
+import { IProductCartItem } from './../../product/product.type';
 import { IProductInvoiceDetails } from "src/app/product/product.type";
 
 export class GlobalSearchInputChanged {
@@ -45,7 +46,31 @@ export class AddToProductsCart {
 
   static readonly type = '[Product Add To Cart]';
 
-  constructor(public products: IProductInvoiceDetails) {}
+  constructor(public product: IProductInvoiceDetails) {}
 
 }
 
+ export class GetCartProductsFromApi {
+
+  static readonly type = '[Api Get Products Using Cart Ids]';
+
+  constructor() {}
+
+}
+
+
+export class RemoveProductFromCart {
+
+  static readonly type = '[Shopping-Cart Remove Product From Cart]';
+
+  constructor(public id: number) {}
+
+}
+
+export class UpdateProductInCart {
+
+  static readonly type = '[Shopping-Cart Update Product In Cart]';
+
+  constructor(public product: IProductInvoiceDetails) {}
+
+}

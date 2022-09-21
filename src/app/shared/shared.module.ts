@@ -8,6 +8,7 @@ import {ButtonModule} from 'primeng/button';
 import { CustomPrimePaginatorComponent } from './components/custom-prime-paginator/custom-prime-paginator.component';
 import { NgxImageZoomModule } from 'ngx-image-zoom';
 import { InputNumberModule } from 'primeng/inputnumber';
+import {DropdownModule} from 'primeng/dropdown';
 
 @NgModule({
   declarations: [

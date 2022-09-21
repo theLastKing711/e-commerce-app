@@ -1,11 +1,12 @@
+import { IProduct } from 'src/app/product/product.type';
 import { StorageService } from './../services/storage.service';
 import { ICategoryItem } from './../../category/category.type';
-import { IProductInvoice, IProductItem, IProductInvoiceDetails } from './../../product/product.type';
-import { tap, map, debounce, debounceTime } from 'rxjs';
+import { IProductInvoice, IProductItem, IProductInvoiceDetails, IProductCartItem } from './../../product/product.type';
+import { tap, map, debounce, debounceTime, filter } from 'rxjs';
 import { Injectable } from "@angular/core";
 import { Action, Selector, State, StateContext } from "@ngxs/store";
 import { SharedService } from "../services/shared.service";
-import { AddToProductsCart, GlobalSearch, SetSearchBarActive, SetSearchBarInActive, ResetSearchList } from './shared.action';
+import { AddToProductsCart, GlobalSearch, SetSearchBarActive, SetSearchBarInActive, ResetSearchList, GetCartProductsFromApi, RemoveProductFromCart, UpdateProductInCart } from './shared.action';
 import { state } from '@angular/animations';
 import { defaultProductsCart } from 'src/app/product/product.constants';
 
@@ -13,7 +14,7 @@ import { defaultProductsCart } from 'src/app/product/product.constants';
     export class SharedStateModel {
       SearchList!: IProductItem[]
       IsSearchBarActive!: boolean;
-      ProductsCart!: IProductInvoice
+      ProductsCart!: IProductInvoice;
     }
 
     @State<SharedStateModel>({
@@ -21,7 +22,7 @@ import { defaultProductsCart } from 'src/app/product/product.constants';
         defaults: {
           SearchList: [],
           IsSearchBarActive: false,
-          ProductsCart: {...defaultProductsCart}
+          ProductsCart: {...defaultProductsCart},
         }
     })
 
@@ -46,11 +47,26 @@ import { defaultProductsCart } from 'src/app/product/product.constants';
           return state.ProductsCart
         }
 
+
         @Selector()
         static getCartItemsCount(state: SharedStateModel) {
           return state.ProductsCart.productInvoiceDetails.reduce((prev, curr) => {
               return prev + curr.productQuantity
           }, 0)
+        }
+
+        @Selector()
+        static getCartItemsTotalPrice(state: SharedStateModel) {
+          return state.ProductsCart.productInvoiceDetails.reduce((prev, curr) => {
+              return prev + (curr.productQuantity * curr.price)
+          }, 0)
+        }
+
+
+
+        @Selector()
+        static getProducts(state: SharedStateModel) {
+          return state.ProductsCart.productInvoiceDetails;
         }
 
         @Action(SetSearchBarActive)
@@ -106,17 +122,36 @@ import { defaultProductsCart } from 'src/app/product/product.constants';
 
 
         @Action(AddToProductsCart)
-        addToProductCart({getState, patchState}: StateContext<SharedStateModel>,  { products } : AddToProductsCart)
+        addToProductCart({getState, patchState}: StateContext<SharedStateModel>,  { product } : AddToProductsCart)
         {
 
           const state = getState()
 
-          const newProductsCart = [...state.ProductsCart.productInvoiceDetails , products ];
+          const ProductAlreadyExist = state.ProductsCart.productInvoiceDetails.find(x => x.id == product.id);
 
-          patchState({
-            ...state,
-              ProductsCart: {...state.ProductsCart, productInvoiceDetails: newProductsCart},
-          })
+
+          if(ProductAlreadyExist)
+          {
+            const newProductsCart = state.ProductsCart.productInvoiceDetails.map(
+              x => x.id == product.id ? {...x, productQuantity: x.productQuantity + product.productQuantity} : {...x})
+
+              patchState({
+                ...state,
+                  ProductsCart: {...state.ProductsCart, productInvoiceDetails: newProductsCart},
+              })
+
+          }
+          else
+          {
+            const newProductsCart = [...state.ProductsCart.productInvoiceDetails , product ];
+
+            patchState({
+              ...state,
+                ProductsCart: {...state.ProductsCart, productInvoiceDetails: newProductsCart},
+            })
+          }
+
+
 
           const newState = getState();
 
@@ -124,5 +159,69 @@ import { defaultProductsCart } from 'src/app/product/product.constants';
 
           return;
         }
+
+        @Action(GetCartProductsFromApi)
+        getCartProductsFromApi({getState, patchState}: StateContext<SharedStateModel>)
+        {
+
+          const state = getState()
+
+          const productIds = state.ProductsCart
+                                  .productInvoiceDetails
+                                  .map(x => x.id);
+
+          return this.sharedService.getProductsUsingIds(productIds)
+                                   .pipe(
+                                    tap(products => {
+
+                                      patchState({...state, ProductsCart: {...state.ProductsCart, productInvoiceDetails:
+                                        products.map(product => {
+                                          const productQuantity = state.ProductsCart.productInvoiceDetails.find(x => x.id == product.id)?.productQuantity!;
+                                          return {...product as IProductCartItem, productQuantity: productQuantity }
+                                        })
+                                       }
+
+                                      })
+
+                                    })
+                                   )
+        }
+
+        @Action(RemoveProductFromCart)
+        removeProductFromCart({getState, patchState}: StateContext<SharedStateModel>, { id }: RemoveProductFromCart)
+        {
+
+          const state = getState()
+
+          const ProductCartList = state.ProductsCart.productInvoiceDetails.filter(x => x.id != id)
+
+          patchState({...state,
+
+                       ProductsCart: {...state.ProductsCart, productInvoiceDetails: ProductCartList}
+                    })
+
+        }
+
+        @Action(UpdateProductInCart)
+        updateProductCartItem({getState, patchState}: StateContext<SharedStateModel>, { product }: UpdateProductInCart)
+        {
+
+          const state = getState()
+
+          const newProductsList: IProductInvoiceDetails[] = state.ProductsCart
+                                                                 .productInvoiceDetails
+                                                                 .map(x =>
+                                                                    x.id == product.id ?
+                                                                             {...x, productQuantity: product.productQuantity}
+                                                                             :
+                                                                             {...x}
+                                                                  )
+
+          patchState({...state,
+                       ProductsCart: {...state.ProductsCart, productInvoiceDetails: newProductsList}
+                    })
+
+        }
+
 
     }

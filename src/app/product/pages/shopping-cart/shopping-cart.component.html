@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-md-8">
+  <div class="first">
 
     <p-card class="shopping-card">
 
@@ -8,18 +8,43 @@
           Shopping Cart
         </h1>
         <span class="shopping-card__price">
-          price
+          Price
         </span>
       </p-header>
 
-      <app-product-cart-card></app-product-cart-card>
+      <div class="shopping-card__products-list">
+        <app-product-cart-card
+          *ngFor="let product of (cartProducts | async)"
+          [product]="product"
+          (deleteButtonClicked)="onProductItemDeleteClicked($event)"
+          (updateButtonClicked)="onProductItemUpdateClicked($event)"
+        >
+        </app-product-cart-card>
+      </div>
 
-      <app-product-cart-card></app-product-cart-card>
-
-      <app-product-cart-card></app-product-cart-card>
-      <app-product-cart-card></app-product-cart-card>
+      <p-footer class="shopping-card__footer">
+        <p class="shopping-card__footer-total-pricing">
+          Subtotal {{ '(' + (cartItemsCount | async)  + ' items): '}}
+          <span class="shopping-card__footer-price">
+            {{ '$' + (cartTotalPrice | async) }}
+          </span>
+        </p>
+      </p-footer>
 
     </p-card>
 
   </div>
+
+  <div class="second">
+    <p-card>
+      <p class="shopping-card__footer-total-pricing">
+        Subtotal {{ '(' + (cartItemsCount | async)  + ' items): '}}
+        <span class="shopping-card__footer-price">
+          {{ '$' + (cartTotalPrice | async) }}
+        </span>
+      </p>
+      <button class="shopping-card__checkout-button">Checkout</button>
+    </p-card>
+  </div>
+
 </div>
