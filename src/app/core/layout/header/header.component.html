@@ -39,17 +39,17 @@
     <div class="nav-belt__right" [ngClass]="{'nav-belt__right--mobile-active': !(isMobileSideBarOpen$ | async)}">
 
 
-      <div class="nav-belt__right-auth-container nav-item">
+      <div class="nav-belt__right-auth-container nav-item nav-item--link">
         <div class="nav-belt__right-auth h-100">
           <a
-            class="nav-belt__sign-in-link h-100 d-flex align-items-center"
+            class="nav-belt__sign-in-link h-100 d-flex align-items-center p-2"
             [routerLink]="['/', 'login']"
             *ngIf="! (loggedUser$ | async)"
           >
           Sign In
           </a>
           <a
-              class="nav-belt__sign-in-link h-100 d-flex align-items-center"
+              class="nav-belt__sign-in-link h-100 d-flex align-items-center p-2"
               [routerLink]="['/', 'login']"
               *ngIf="(loggedUser$ | async)"
               (click)="onLogOutClicked()"

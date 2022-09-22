@@ -31,6 +31,10 @@
   }
 
 
+  &--link {
+    padding: 0;
+  }
+
 }
 
 
@@ -77,6 +81,14 @@
 
   }
 
+  &__right-auth {
+    @media screen and (max-width: 600px)
+    {
+      padding: 0;
+      width: 100%;
+    }
+  }
+
   &__right-auth-container{
 
     @media screen and (max-width: 600px)
@@ -84,7 +96,6 @@
       height: auto;
       display: flex;
       justify-content: center;
-      padding: 1rem 0.5rem;
     }
 
   }
@@ -95,8 +106,12 @@
 
     @media screen and (max-width: 600px)
     {
-      padding: 0;
+      padding: 1rem 0.5rem !important;
       height: auto !important;
+      width: 100% !important;
+      display: flex;
+      justify-content: center;
+
     }
 
   }
