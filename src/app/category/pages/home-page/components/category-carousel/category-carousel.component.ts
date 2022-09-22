@@ -38,6 +38,9 @@ export class CategoryCarouselComponent implements OnInit {
   ngOnInit(): void {
   }
 
-
+  getProductPageLink(categoryId: number, productId: number)
+  {
+    return `/categories/${categoryId}/products/${productId}`;
+  }
 
 }

@@ -1,3 +1,4 @@
+import { query } from '@angular/animations';
 import { IPaginatedData, IPagination } from '../shared/shared.type';
 import { IProduct, IProductPrice, IProductPriceFilter, SortType, IProductInvoice } from './product.type';
 export const products: IPaginatedData<IProduct> = {
@@ -127,7 +128,8 @@ export const defaultProductsFilter = {
     endValue: 1000000,
     sortType: SortType.All
   },
-  stars: -1
+  stars: -1,
+  query: ""
 }
 
 
@@ -141,7 +143,9 @@ export const defaultProduct: IProduct = {
   price: 0,
   totalReviews: 0,
   rating: 0,
-  details: []
+  details: [],
+  thumbImagePath: "",
+  fullImagePath: ""
 
 }
 

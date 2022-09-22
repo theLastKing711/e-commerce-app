@@ -1,22 +1,11 @@
-
-:host {
-  flex: 1;
-}
-
-.products-main {
-  // display: block;
+.products-search {
   padding: 0.875rem 1.125rem 1.125rem;
+
   display: flex;
 
-  @media screen and (max-width: 850px) {
-
-    padding: 0.875rem 0.562rem 1.125rem;
-
-  }
-
 }
 
-.products-content {
+.products-search-content {
 
   padding-left: 0.75rem;
 
@@ -60,8 +49,4 @@
     padding: 0;
 
   }
-
-
-
-
 }

@@ -1,3 +1,4 @@
+import { AlertifyService } from './../../shared/services/alertify.service';
 import { StorageService } from './../../shared/services/storage.service';
 import { catchError, map, Observable, of, tap } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
@@ -11,7 +12,7 @@ import { ILogin, IRegister, IResponse, IToken } from '../types/auth.model';
 })
 export class AuthService {
 
-  constructor(private httpClient: HttpClient, private storageService: StorageService) { }
+  constructor(private httpClient: HttpClient, private storageService: StorageService,private alertifyService: AlertifyService) { }
 
   authUrl: string = `${environment.base_url}appUsers`;
 
@@ -21,6 +22,9 @@ export class AuthService {
 
     return this.httpClient.post<IResponse>(registerUrl, userFormData)
                           .pipe(
+                            tap(x =>{
+                              this.alertifyService.success("User created Successfully")
+                            })
                             // catchError(error => of(error.asdf))
                           )
 

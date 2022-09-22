@@ -74,3 +74,20 @@ export class UpdateProductInCart {
   constructor(public product: IProductInvoiceDetails) {}
 
 }
+
+export class OpenMobileSideBar {
+
+  static readonly type = '[Header Open Mobile Sidebar]';
+
+  constructor() {}
+
+}
+
+
+export class CloseMobileSideBar {
+
+  static readonly type = '[Header Close Mobile Sidebar]';
+
+  constructor() {}
+
+}

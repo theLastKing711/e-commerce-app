@@ -1,3 +1,5 @@
+import { Title, Meta } from '@angular/platform-browser';
+import { Store } from '@ngxs/store';
 import { ErrorHandlerService } from './../../shared/services/error-handler.service';
 import { ILogin } from './../types/auth.model';
 import { Subscription } from 'rxjs';
@@ -6,6 +8,7 @@ import { AuthService } from './../services/auth.service';
 import { Validators, FormBuilder } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
+import { LogInUser } from '../store/authentication.action';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +22,7 @@ export class LoginComponent implements OnInit {
 
   errorMessage!: string;
 
-  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router, private errorHandlerServise: ErrorHandlerService) { }
+  constructor(private fb: FormBuilder, private store: Store, private errorHandlerServise: ErrorHandlerService,private titleService: Title, private  metaService: Meta) { }
 
   loginForm  = this.fb.group({
     username: ['', Validators.required],
@@ -36,6 +39,11 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    this.titleService.setTitle("Sign In - Ecommerce.com")
+
+    this.metaService.addTag({name: 'description', content: 'Log In To E-commerce and explore new world of shopping'})
+
     this.errorSubscription = this.errorHandlerServise.ErrorMessage.subscribe(errorMessage => {
       this.errorMessage = errorMessage
     })
@@ -53,7 +61,7 @@ export class LoginComponent implements OnInit {
       password
     }
 
-    this.loginSubscription =  this.authService.login(userLoginData)
+    this.loginSubscription =  this.store.dispatch(new LogInUser(userLoginData))
     .subscribe({
       next: () => {},
       error:

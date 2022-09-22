@@ -11,3 +11,9 @@ export interface IPagination
   pageNumber: number;
   pageSize: number;
 }
+
+
+export interface IFooterLinks {
+  title: string;
+  links: string[];
+}

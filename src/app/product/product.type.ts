@@ -1,3 +1,4 @@
+import { query } from '@angular/animations';
 import { IPagination } from './../shared/shared.type';
 interface IProductBase {
   id: number;
@@ -13,6 +14,9 @@ export interface IProduct extends IProductBase {
   price: number;
   totalReviews: number;
   details: IDetails[];
+  thumbImagePath: string;
+  fullImagePath: string;
+
 }
 
 export interface IDetails {
@@ -26,6 +30,7 @@ export interface IProductFilter {
   pagination: IPagination;
   price: IProductPriceFilter;
   stars: number;
+  query: string;
 
 }
 

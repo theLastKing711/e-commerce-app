@@ -6,7 +6,7 @@ import { tap, map, debounce, debounceTime, filter } from 'rxjs';
 import { Injectable } from "@angular/core";
 import { Action, Selector, State, StateContext } from "@ngxs/store";
 import { SharedService } from "../services/shared.service";
-import { AddToProductsCart, GlobalSearch, SetSearchBarActive, SetSearchBarInActive, ResetSearchList, GetCartProductsFromApi, RemoveProductFromCart, UpdateProductInCart } from './shared.action';
+import { AddToProductsCart, GlobalSearch, SetSearchBarActive, SetSearchBarInActive, ResetSearchList, UpdateProductInCart, OpenMobileSideBar, CloseMobileSideBar, RemoveProductFromCart, GetCartProductsFromApi } from './shared.action';
 import { state } from '@angular/animations';
 import { defaultProductsCart } from 'src/app/product/product.constants';
 
@@ -15,6 +15,7 @@ import { defaultProductsCart } from 'src/app/product/product.constants';
       SearchList!: IProductItem[]
       IsSearchBarActive!: boolean;
       ProductsCart!: IProductInvoice;
+      isMobileSideBarOpen!: boolean;
     }
 
     @State<SharedStateModel>({
@@ -23,6 +24,7 @@ import { defaultProductsCart } from 'src/app/product/product.constants';
           SearchList: [],
           IsSearchBarActive: false,
           ProductsCart: {...defaultProductsCart},
+          isMobileSideBarOpen: false
         }
     })
 
@@ -62,11 +64,14 @@ import { defaultProductsCart } from 'src/app/product/product.constants';
           }, 0)
         }
 
-
-
         @Selector()
         static getProducts(state: SharedStateModel) {
           return state.ProductsCart.productInvoiceDetails;
+        }
+
+        @Selector()
+        static getIsMobileSideBarOpen(state: SharedStateModel) {
+          return state.isMobileSideBarOpen;
         }
 
         @Action(SetSearchBarActive)
@@ -223,5 +228,23 @@ import { defaultProductsCart } from 'src/app/product/product.constants';
 
         }
 
+
+        @Action(OpenMobileSideBar)
+        openMobileSideBar({getState, setState}: StateContext<SharedStateModel>) {
+
+            const state = getState();
+
+            setState({...state,isMobileSideBarOpen: true})
+
+        }
+
+        @Action(CloseMobileSideBar)
+        closeMobileSideBar({getState, setState}: StateContext<SharedStateModel>) {
+
+            const state = getState();
+
+            setState({...state,isMobileSideBarOpen: false})
+
+        }
 
     }

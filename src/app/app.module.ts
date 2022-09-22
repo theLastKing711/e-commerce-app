@@ -1,7 +1,8 @@
+import { AuthState } from './authentication/store/authentication.state';
 import { SharedState } from './shared/store/shared.state';
 import { CoreModule } from './core/core.module';
 import { CategoryState } from './category/store/category.state';
-import { ProductState } from './product/store/product.state';
+import {  ProductState } from './product/store/product.state';
 import { SharedModule } from './shared/shared.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -14,9 +15,10 @@ import {CardModule} from 'primeng/card';
 import {ButtonModule} from 'primeng/button';
 import { ReactiveFormsModule } from '@angular/forms';
 import {FileUploadModule} from 'primeng/fileupload';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgxsModule } from '@ngxs/store';
 import { NgxsStoragePluginModule } from '@ngxs/storage-plugin';
+import { TokenInterceptor } from './Interceptors/TokenInterceptor';
 
 @NgModule({
   declarations: [
@@ -34,12 +36,15 @@ import { NgxsStoragePluginModule } from '@ngxs/storage-plugin';
     FileUploadModule,
     SharedModule,
     CoreModule,
-    NgxsModule.forRoot([ProductState, CategoryState, SharedState]),
+    NgxsModule.forRoot([ProductState, CategoryState, SharedState, AuthState]),
     NgxsStoragePluginModule.forRoot({
-      key: 'shared.ProductsCart.productInvoiceDetails'
+      key: [
+          'shared.ProductsCart.productInvoiceDetails',
+          'authentication.user'
+      ]
     })
   ],
-  providers: [],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

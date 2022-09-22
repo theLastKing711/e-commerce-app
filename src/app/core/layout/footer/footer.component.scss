@@ -1,0 +1,56 @@
+:host {
+  background-color: #232F3E;
+  display: block;
+  padding: 2rem 0;
+  // height: 100%;
+
+}
+
+
+.footer {
+
+  padding-bottom: 4rem !important;
+
+
+  &__main-list {
+    margin-bottom: 1rem;
+
+
+  @media screen and (max-width: 575px) {
+
+    text-align: center;
+  }
+
+  }
+
+  &__main-list-title {
+    font-size: 1rem;
+    font-weight: bold;
+    color: white;
+    margin-bottom: 0.5rem;
+    display: inline-block;
+  }
+
+  &__sub-list-item {
+    color: white;
+    margin-bottom: 0.25rem;
+    font-size: 0.9rem;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &__sub-list-item-link {
+    cursor: pointer;
+    color: white;
+
+    &:hover {
+      text-decoration: underline;
+    }
+
+  }
+
+
+
+}

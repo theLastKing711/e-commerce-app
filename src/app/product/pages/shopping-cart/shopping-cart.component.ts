@@ -1,3 +1,4 @@
+import { Title, Meta } from '@angular/platform-browser';
 import { IProductInvoiceDetails } from 'src/app/product/product.type';
 import { RemoveProductFromCart, UpdateProductInCart } from './../../../shared/store/shared.action';
 import { Observable } from 'rxjs';
@@ -19,9 +20,13 @@ export class ShoppingCartComponent implements OnInit {
   @Select(SharedState.getCartItemsCount) cartItemsCount!: Observable<number>;
 
 
-  constructor(private store: Store) { }
+  constructor(private store: Store, private titleService: Title, private metaService: Meta) { }
 
   ngOnInit(): void {
+
+    this.titleService.setTitle("E-commerce.com checkout Purchased Item")
+    this.metaService.addTag({name: "description", content: "please checkout Purchased Items to buy Purchased products"})
+
     this.store.dispatch(new GetCartProductsFromApi());
   }
 
@@ -44,5 +49,10 @@ export class ShoppingCartComponent implements OnInit {
     this.store.dispatch(new UpdateProductInCart(product));
   }
 
+
+  trackByProductFn(index: number, product: IProductInvoiceDetails)
+  {
+    return product.id;
+  }
 
 }

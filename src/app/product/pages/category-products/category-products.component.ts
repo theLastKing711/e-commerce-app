@@ -1,3 +1,4 @@
+import { Title, Meta } from '@angular/platform-browser';
 import { IPaginatedData, IPagination } from './../../../shared/shared.type';
 import { UpdateFilter, GetCategoryProducts, ResetCategoryProducts, ResetCategoryProductsFilter, UpdateProductPagination } from './../../store/product.action';
 import { combineLatest, Observable, map, Subscription, filter } from 'rxjs';
@@ -29,10 +30,15 @@ export class CategoryProductsComponent implements OnInit, OnDestroy{
   @Select(ProductState.getProductList) productsList$!: Observable<IPaginatedData<IProduct>>;
   @Select(ProductState.getFilter) productFilters$!: Observable<IProductFilter>;
 
-  constructor( private store: Store, private route: ActivatedRoute, private router: Router) {}
+  constructor( private store: Store, private route: ActivatedRoute, private router: Router, private titleService: Title,private  metaService: Meta) {}
 
 
   ngOnInit(): void {
+
+
+    this.titleService.setTitle(`Product Categories of E-commerce Site`)
+
+    this.metaService.addTag({name: "description", content: `list of Products Of Selected Product select on to check out it's details and/or purchase it`})
 
     this.routerSubscription = this.route.params.subscribe(params => {
       this.id = params['id']
@@ -78,6 +84,11 @@ export class CategoryProductsComponent implements OnInit, OnDestroy{
   onNavigationLinkClicked(event: number)
   {
     this.router.navigate(['categories', event])
+  }
+
+  trackByProductFn(index: number, product: IProduct)
+  {
+    return product.id;
   }
 
   ngOnDestroy(): void {

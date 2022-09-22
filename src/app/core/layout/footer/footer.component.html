@@ -1,0 +1,16 @@
+<div class="row custom-container mx-auto footer">
+  <div class="col-md-3 col-sm-6" *ngFor="let footerLink of links">
+    <ul class="footer__main-list">
+      <li class="footer__main-list__item">
+        <span class="footer__main-list-title">{{ footerLink.title }}</span>
+        <ul class="footer__sub-list">
+          <li *ngFor="let item of footerLink.links" class="footer__sub-list-item">
+            <a class="footer__sub-list-item-link " href="dummysite">
+              {{ item }}
+            </a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>

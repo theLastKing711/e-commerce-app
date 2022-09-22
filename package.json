@@ -20,6 +20,7 @@
     "@angular/router": "^14.0.0",
     "@ngxs/storage-plugin": "^3.7.5",
     "@ngxs/store": "^3.7.5",
+    "alertifyjs": "^1.13.1",
     "bootstrap": "^5.2.0",
     "ngx-image-zoom": "^1.0.1",
     "primeicons": "^5.0.0",

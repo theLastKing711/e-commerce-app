@@ -40,6 +40,13 @@ import { IProductFilter } from './../product.type';
     }
 
 
+    export class ResetProduct {
+      static readonly type = '[Product Reset Dto]';
+
+      constructor(){}
+    }
+
+
     // export class GetCategoryProductsFilterdByPrice {
     //   static readonly type = '[Product Get category products filtered by price]';
 

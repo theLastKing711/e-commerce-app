@@ -54,6 +54,10 @@
     padding-top: 75% !important;
     display: block;
     cursor: pointer;
+
+    &:hover {
+      color: #C7511F;
+    }
   }
 
   &__image {
@@ -77,6 +81,15 @@
     text-align: center;
   }
 
+  &__content-title-link  {
+    cursor: pointer;
+    color: black;
+
+    &:hover {
+      color: #C7511F;
+    }
+
+  }
 
   &__content-price {
     color: black;

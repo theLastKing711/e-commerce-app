@@ -1,11 +1,12 @@
+import { Meta, Title } from '@angular/platform-browser';
 import { IProductInvoiceDetails } from './../../product.type';
 import { ProductState } from '../../store/product.state';
 
-import { GetProductById } from '../../store/product.action';
+import { GetProductById, ResetProduct } from '../../store/product.action';
 import { Subscription, Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { Select, Store } from '@ngxs/store';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { IProduct } from 'src/app/product/product.type';
 import { AddToProductsCart } from 'src/app/shared/store/shared.action';
 
@@ -14,7 +15,7 @@ import { AddToProductsCart } from 'src/app/shared/store/shared.action';
   templateUrl: './product-details.component.html',
   styleUrls: ['./product-details.component.scss']
 })
-export class ProductDetailsComponent implements OnInit {
+export class ProductDetailsComponent implements OnInit, OnDestroy {
 
   productSubscription!: Subscription;
 
@@ -26,9 +27,13 @@ export class ProductDetailsComponent implements OnInit {
 
   id!: number;
 
-  constructor(public route: ActivatedRoute, private store: Store) { }
+  constructor(public route: ActivatedRoute, private store: Store, private titleService: Title, private metaService: Meta ) { }
 
   ngOnInit(): void {
+
+    this.titleService.setTitle(`E-commerce.com details of product ${this.product.name}`)
+
+    this.metaService.addTag({name: "description", content: `this is details page of product ${this.product.name} you can purchase it or check it's list of photos`})
 
     this.route.params
               .subscribe(param => {
@@ -60,6 +65,10 @@ export class ProductDetailsComponent implements OnInit {
 
     this.store.dispatch( new AddToProductsCart(productInvoiceDetails))
 
+  }
+
+  ngOnDestroy(): void {
+      this.store.dispatch(new ResetProduct());
   }
 
 }

@@ -12,18 +12,18 @@
     (focus)="onInputFocused()"
     (blur)="onInputBlured()"
     (input)="onSearchInputChanged($event)"
+    (keypress)="onSearchInputKeyPressed($event, searchButton)"
     #searchInput
-
   />
 
-  <div class="search-input__button-container">
-    <input type="button" class="search-input__button"/>
+  <div class="search-input__button-container" (click)="getSearchProductsLink(searchInput)">
+    <input type="button" class="search-input__button" #searchButton/>
     <i class="pi pi-search search-input__search-icon"></i>
   </div>
 
   <div class="search-result" (focus)="onInputFocused()">
     <ul class="search-result__list">
-      <li *ngFor="let item of searchList" class="search-result__item">
+      <li *ngFor="let item of searchList; TrackByProductFn" class="search-result__item">
         <a class="search-result__item-link" (click)="onProductLinkClicked(item.categoryId, item.id)">
           {{ item.name}}
         </a>

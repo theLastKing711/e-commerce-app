@@ -3,7 +3,7 @@ import { defaultPagination, defaultProduct, defaultProductsFilter } from '../pro
 import { IPaginatedData, IPagination } from '../../shared/shared.type';
 import {  tap } from 'rxjs';
 import { ProductService } from '../services/product.service';
-import { UpdateFilter, GetCategoryProducts, ResetCategoryProducts, ResetCategoryProductsFilter, UpdateProductPagination, GetProductById } from './product.action';
+import { UpdateFilter, GetCategoryProducts, ResetCategoryProducts, ResetCategoryProductsFilter, UpdateProductPagination, GetProductById, ResetProduct } from './product.action';
 import { IProductFilter } from '../product.type';
 import { IProduct } from '../product.type';
 import { State, Selector, Action, StateContext } from '@ngxs/store';
@@ -139,6 +139,19 @@ import { Injectable } from '@angular/core';
 
                               })
                              )
+
+        }
+
+        @Action(ResetProduct)
+        resetProduct({getState, patchState}: StateContext<ProductStateModel>)
+        {
+          const state = getState();
+
+          patchState({...state, Product: {...defaultProduct} })
+
+          const newState = getState();
+
+          console.log("new State", newState)
 
         }
 

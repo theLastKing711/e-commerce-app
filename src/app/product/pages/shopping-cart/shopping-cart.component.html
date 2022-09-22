@@ -14,7 +14,7 @@
 
       <div class="shopping-card__products-list">
         <app-product-cart-card
-          *ngFor="let product of (cartProducts | async)"
+          *ngFor="let product of (cartProducts | async); trackBy: trackByProductFn"
           [product]="product"
           (deleteButtonClicked)="onProductItemDeleteClicked($event)"
           (updateButtonClicked)="onProductItemUpdateClicked($event)"

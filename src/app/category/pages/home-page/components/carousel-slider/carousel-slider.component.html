@@ -14,9 +14,9 @@
         <img [src]="photo" alt="img" class="carousel__image" #image />
     </li>
 
-    <div class="carousel__item-layer" [ngStyle]="{'background-image': photos[lastActivePhotoIndex]}" >
-      <img [src]="photos[lastActivePhotoIndex]" />
-    </div>
+    <li class="carousel__item-layer" [ngStyle]="{'background-image': photos[lastActivePhotoIndex]}" >
+      <img [src]="photos[lastActivePhotoIndex]" alt="" />
+    </li>
 
   </ul>
 
@@ -25,7 +25,7 @@
     <button
       class="carousel__action-button carousel__action-button--prev-button"
       (click)="lastActivePhotoIndex = activePhotoIndex ;activePhotoIndex = carouselPagination.prev(activePhotoIndex, photos)"
-
+      aria-label="Website services carousel previous button."
       >
       <i class="pi pi-chevron-left"></i>
     </button>
@@ -34,9 +34,8 @@
   <div class="carousel__actions-container carousel__actions-container--right">
     <button
       class="carousel__action-button carousel__action-button--next-button"
-
+      aria-label="Website services carousel next button."
       (click)="lastActivePhotoIndex = activePhotoIndex ;activePhotoIndex = carouselPagination.next(activePhotoIndex, photos);"
-
       >
       <i class="pi pi-chevron-right"></i>
     </button>

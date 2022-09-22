@@ -18,11 +18,44 @@
         </app-search-bar>
     </div>
 
-    <div class="nav-belt__right">
+    <button
+    *ngIf="! (isMobileSideBarOpen$ | async)"
+      aria-label="mobile sidebar button"
+      class="nav-belt__mobile-side-bar-button"
+      (click)="openMobileSideBar()"
+    >
+      <i class="pi pi-bars"></i>
+    </button>
 
-      <div class="nav-belt__right-auth nav-item">
+    <button
+      *ngIf="(isMobileSideBarOpen$ | async)"
+      aria-label="mobile sidebar button"
+      class="nav-belt__mobile-side-bar-button nav-belt__mobile-side-bar-button--close"
+      (click)="closeMobileSideBar()"
+    >
+      <i class="pi pi-times-circle"></i>
+    </button>
+
+    <div class="nav-belt__right" [ngClass]="{'nav-belt__right--mobile-active': !(isMobileSideBarOpen$ | async)}">
+
+
+      <div class="nav-belt__right-auth-container nav-item">
         <div class="nav-belt__right-auth h-100">
-          <a class="nav-belt__sign-in-link h-100 d-flex align-items-center" [routerLink]="['/', 'login']" >Sign In</a>
+          <a
+            class="nav-belt__sign-in-link h-100 d-flex align-items-center"
+            [routerLink]="['/', 'login']"
+            *ngIf="! (loggedUser$ | async)"
+          >
+          Sign In
+          </a>
+          <a
+              class="nav-belt__sign-in-link h-100 d-flex align-items-center"
+              [routerLink]="['/', 'login']"
+              *ngIf="(loggedUser$ | async)"
+              (click)="onLogOutClicked()"
+            >
+            Log Out
+          </a>
         </div>
       </div>
 

@@ -6,7 +6,7 @@
 <section class="categories custom-container mx-auto row px-2 pb-4">
 
 
-  <div class="col-md-6 col-lg-4" *ngFor="let category of (categoriesList$ | async) || []" #test>
+  <div class="col-md-6 col-lg-4" *ngFor="let category of (categoriesList$ | async) || []; trackBy: trackByFn" #test>
 
     <app-category-preview-card title="Test Category" [image]="category.path" [categoryId]="category.id">
     </app-category-preview-card>

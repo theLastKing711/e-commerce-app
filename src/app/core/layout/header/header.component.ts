@@ -1,12 +1,15 @@
+import { LogOutUser } from './../../../authentication/store/authentication.action';
+import { AuthState } from './../../../authentication/store/authentication.state';
 import { Router } from '@angular/router';
 import { ICategoryItem } from './../../../category/category.type';
 import { IProductItem } from './../../../product/product.type';
 import { SharedState } from './../../../shared/store/shared.state';
-import { GlobalSearch, SetSearchBarActive, SetSearchBarInActive, ResetSearchList, GlobalSearchInputChanged } from './../../../shared/store/shared.action';
+import { GlobalSearch, SetSearchBarActive, SetSearchBarInActive, ResetSearchList, GlobalSearchInputChanged, OpenMobileSideBar, CloseMobileSideBar } from './../../../shared/store/shared.action';
 import { Actions, ofActionDispatched, Select, Store } from '@ngxs/store';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable, debounceTime, takeUntil, Subscription, Subject } from 'rxjs';
 import { query } from '@angular/animations';
+import { IToken } from 'src/app/authentication/types/auth.model';
 
 @Component({
   selector: 'app-header',
@@ -20,6 +23,27 @@ export class HeaderComponent implements OnInit{
   @Select(SharedState.getIsSearchBarActive) isSearchBarActive$!: Observable<boolean>;
   @Select(SharedState.getSearchList) searchList$!: Observable<IProductItem[]>;
   @Select(SharedState.getCartItemsCount) cartItemsCount$!: Observable<number>;
+  @Select(SharedState.getIsMobileSideBarOpen) isMobileSideBarOpen$!: Observable<boolean>;
+
+  @Select(AuthState.getLoggedInUser) loggedUser$!: Observable<IToken>;
+
+
+
+  constructor(private store: Store, private actions$: Actions, private router: Router) {
+    actions$
+      .pipe(
+        ofActionDispatched(GlobalSearchInputChanged),
+        debounceTime(500),
+     )
+     .subscribe(payload =>
+      {
+        this.store.dispatch(new GlobalSearch(payload.query.toLowerCase()))
+      }
+      )
+  }
+
+  ngOnInit(): void {
+  }
 
   onSearchTermChanged(event: string) {
 
@@ -47,22 +71,19 @@ export class HeaderComponent implements OnInit{
 
   }
 
-  constructor(private store: Store, private actions$: Actions, private router: Router) {
-    actions$
-      .pipe(
-        ofActionDispatched(GlobalSearchInputChanged),
-        debounceTime(500),
-     )
-     .subscribe(payload =>
-      {
-        this.store.dispatch(new GlobalSearch(payload.query.toLowerCase()))
-      }
-      )
+
+  onLogOutClicked() {
+    this.store.dispatch(new LogOutUser())
   }
 
-  ngOnInit(): void {
+  openMobileSideBar()
+  {
+    this.store.dispatch(new OpenMobileSideBar());
   }
 
-
+  closeMobileSideBar()
+  {
+    this.store.dispatch(new CloseMobileSideBar());
+  }
 
 }

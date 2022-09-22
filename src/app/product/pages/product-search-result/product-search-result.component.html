@@ -1,0 +1,50 @@
+<main class="products-search">
+
+  <app-products-side-bar
+    [starsFilterOptions]="starsFilterOptions"
+    [priceFilterOptions]="priceFilterOptions"
+    (updatePriceFilter)="updateProductFilter('price', $event)"
+    (updateStarsFilter)="updateProductFilter('stars', $event)"
+    [selectedPriceFilter]="(productFilters$ | async )?.price!"
+    [selectedStarFilter]="(productFilters$ | async)?.stars!"
+  >
+  </app-products-side-bar>
+
+  <section class="products-search-content flex-grow-1">
+
+    <h2 class="products-search-content__results-title">Results</h2>
+
+    <app-product-search-result-bar
+          [pagination]="(productFilters$ | async)?.pagination || { pageNumber: 1, pageSize: 5}"
+          [totalCount]="(productsList$ | async)?.totalCount || 0"
+    >
+    </app-product-search-result-bar>
+
+    <div class=" products-list">
+      <div *ngFor="let product of (productsList$ | async)?.data; trackByProductFn">
+        <article class="h-100 products-list__item">
+          <app-product-card
+              [product]="product"
+              class="h-100"
+              (NavigationLinkClicked)="onNavigationLinkClicked($event)"
+            >
+          </app-product-card>
+        </article>
+
+      </div>
+    </div>
+
+    <div class="custom-pagination d-flex justify-content-center mt-2">
+      <app-custom-prime-paginator
+          [rows]="(productsList$ | async)?.data?.length!"
+          [totalRecords]="(productsList$ | async)?.totalCount!"
+          [pageNumber]="(productFilters$ | async)?.pagination?.pageNumber!"
+          (onPageChange)="onProductsPageChange($event)"
+
+      >
+      </app-custom-prime-paginator>
+    </div>
+
+
+  </section>
+</main>

@@ -26,7 +26,7 @@
       </app-product-search-result-bar>
 
       <div class=" products-list">
-        <div *ngFor="let product of (productsList$ | async)?.data">
+        <div *ngFor="let product of (productsList$ | async)?.data; trackByProductFn">
           <article class="h-100 products-list__item">
             <app-product-card
                 [product]="product"

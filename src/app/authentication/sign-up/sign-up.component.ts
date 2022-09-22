@@ -1,3 +1,4 @@
+import { Title, Meta } from '@angular/platform-browser';
 import { IRegister } from './../types/auth.model';
 import { AuthService } from './../services/auth.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
@@ -14,7 +15,7 @@ export class SignUpComponent implements OnInit,OnDestroy {
 
   signUpSubscription!: Subscription;
 
-  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) { }
+  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router,private titleService: Title, private metaService: Meta) { }
 
   signUpForm  = this.fb.group({
     username: ['', Validators.required],
@@ -35,6 +36,11 @@ export class SignUpComponent implements OnInit,OnDestroy {
   }
 
   ngOnInit(): void {
+
+
+      this.titleService.setTitle("Create Account - Ecommerce");
+      this.metaService.addTag({name: 'description', content: 'By Creating an account you agree to E-commerce Conditions of Use and Privacy Notice'})
+
   }
 
 

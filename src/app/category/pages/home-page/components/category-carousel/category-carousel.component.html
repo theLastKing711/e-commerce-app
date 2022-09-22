@@ -9,15 +9,17 @@
 
   <ng-template let-product pTemplate="item">
     <div class="categories-carousel__image-container">
-      <a class="categories-carousel__image-link" [routerLink]="['/categories', product.categoryId, 'products', product.id]">
+      <a class="categories-carousel__image-link" [routerLink]="getProductPageLink(product.categoryId, product.id)">
         <img [src]="product.path" [alt]="product.name" class="categories-carousel__image" />
       </a>
     </div>
     <div class="categories-carousel__content">
       <h5 class="categories-carousel__content-title mt-2">
-        {{ product.name }}
+        <a class="categories-carousel__content-title-link" [routerLink]="getProductPageLink(product.categoryId, product.id)">
+          {{ product.name }}
+        </a>
       </h5>
-      <a class="categories-carousel__content-price mt-2" [routerLink]="['/categories', product.categoryId, 'products', product.id]">
+      <a class="categories-carousel__content-price mt-2" [routerLink]="getProductPageLink(product.categoryId, product.id)">
         ${{ product.price }}
       </a>
     </div>

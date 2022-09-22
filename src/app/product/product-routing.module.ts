@@ -1,3 +1,4 @@
+import { ProductSearchResultComponent } from './pages/product-search-result/product-search-result.component';
 import { ShoppingCartComponent } from './pages/shopping-cart/shopping-cart.component';
 import { CategoryProductsComponent } from './pages/category-products/category-products.component';
 import { NgModule } from '@angular/core';
@@ -10,13 +11,17 @@ const routes: Routes = [
     component: ShoppingCartComponent
   },
   {
+    path: 'products/search-result',
+    component:  ProductSearchResultComponent
+  },
+  {
     path: ':id',
     component: CategoryProductsComponent
   },
   {
     path: ':id/products/:productId',
     component: ProductDetailsComponent
-  },
+  }
 
 ];
 

@@ -87,7 +87,7 @@ export class ProductService {
                     .set('price.sortType', filter.price.sortType)
 
       params = params.set('stars', filter.stars)
-
+      params = params.set('query', filter.query)
 
     return this.httpClient.get<IPaginatedData<IProduct>>(apiCategoriesUril, {params: params})
 

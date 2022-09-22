@@ -1,6 +1,10 @@
+import { Store } from '@ngxs/store';
+import { query } from '@angular/animations';
+import { Router } from '@angular/router';
 import { debounceTime, fromEvent } from 'rxjs';
-import { IProductItem } from './../../../product/product.type';
+import { IProductFilter, IProductItem } from './../../../product/product.type';
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { UpdateFilter } from 'src/app/product/store/product.action';
 
 @Component({
   selector: 'app-search-bar',
@@ -19,7 +23,7 @@ export class SearchBarComponent implements OnInit {
 
   isInputFocused: boolean = false;
 
-  constructor() { }
+  constructor(private router: Router, private store: Store) { }
 
   ngOnInit(): void {
     console.log("searchList", this.searchList)
@@ -53,12 +57,53 @@ export class SearchBarComponent implements OnInit {
   {
      const query = event.target.value;
 
+
+
     this.searchInputFocuesed.emit(query)
   }
 
-  onProductLinkClicked(categoryId:number, productId:number) {
+  onSearchInputKeyPressed(event: KeyboardEvent, searchButton: HTMLInputElement)
+  {
 
+    if(event.key == "Enter")
+    {
+      searchButton.click();
+
+      this.onInputBlured();
+    }
+
+  }
+
+  onProductLinkClicked(categoryId: number, productId: number)
+  {
     this.ItemLinkClicked.emit([categoryId, productId]);
+  }
+
+  getSearchProductsLink(inputText: HTMLInputElement)
+  {
+
+    const inputValue = inputText.value;
+
+    const searchResultPage = `/categories/products/search-result`
+
+    // this.updateProductFilter("query", inputValue);
+
+    this.router.navigate(
+      [searchResultPage],
+      {queryParams: { query: inputValue}}
+      );
+
+
+  }
+
+  updateProductFilter<T extends keyof IProductFilter>(filter: T, filterValue: IProductFilter[T])
+  {
+    this.store.dispatch(new UpdateFilter({filter, filterValue}))
+  }
+
+  TrackByProductFn(index: number, product: IProductItem)
+  {
+    return product.id;
   }
 
 }
