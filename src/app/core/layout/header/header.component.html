@@ -36,7 +36,7 @@
       <i class="pi pi-times-circle"></i>
     </button>
 
-    <div class="nav-belt__right" [ngClass]="{'nav-belt__right--mobile-active': !(isMobileSideBarOpen$ | async)}">
+    <div class="nav-belt__right" [ngClass]="{'nav-belt__right--mobile-active': (isMobileSideBarOpen$ | async)}">
 
 
       <div class="nav-belt__right-auth-container nav-item nav-item--link">
