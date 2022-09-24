@@ -31,14 +31,17 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
 
-    this.titleService.setTitle(`E-commerce.com details of product ${this.product.name}`)
 
-    this.metaService.addTag({name: "description", content: `this is details page of product ${this.product.name} you can purchase it or check it's list of photos`})
+
+    console.log("alkdjsla")
 
     this.route.params
               .subscribe(param => {
 
                 const productId  = param["productId"]
+
+                console.log("productId", productId)
+
 
                 this.id = productId
 
@@ -46,6 +49,11 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
 
                 this.productSubscription = this.product$.subscribe(res => {
                   this.product = res
+
+                  this.titleService.setTitle(`E-commerce.com details of product ${this.product.name.slice(10)}`)
+
+                  this.metaService.addTag({name: "description", content: `this is details page of product ${this.product.name} you can purchase it or check it's list of photos`})
+
                 })
 
               })
