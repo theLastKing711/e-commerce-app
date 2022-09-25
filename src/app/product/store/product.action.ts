@@ -9,39 +9,39 @@ import { IProductFilter } from './../product.type';
     }
 
     export class UpdateProductPagination {
-      static readonly type = '[Product Update Pagination]';
+      static readonly type = '[Product] Update Pagination';
 
       constructor(public payload: number) {}
 
     }
 
     export class GetCategoryProducts {
-      static readonly type = '[Product Get category products filtered by stars]';
+      static readonly type = '[Product] Get category products filtered by stars';
 
       constructor(public payload: number, public filter: IProductFilter){}
     }
 
     export class ResetCategoryProducts {
-      static readonly type = '[Product Reset Products List]';
+      static readonly type = '[Product] Reset Products List';
 
       constructor(){}
     }
 
     export class ResetCategoryProductsFilter {
-      static readonly type = '[Product Reset Products Filter]';
+      static readonly type = '[Product] Reset Products Filter';
 
       constructor(){}
     }
 
     export class GetProductById {
-      static readonly type = '[Product Get By Id]';
+      static readonly type = '[Product] Get By Id';
 
       constructor(public id: number){}
     }
 
 
     export class ResetProduct {
-      static readonly type = '[Product Reset Dto]';
+      static readonly type = '[Product] Reset Dto';
 
       constructor(){}
     }

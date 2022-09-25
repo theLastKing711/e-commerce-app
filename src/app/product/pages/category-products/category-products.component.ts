@@ -30,7 +30,14 @@ export class CategoryProductsComponent implements OnInit, OnDestroy{
   @Select(ProductState.getProductList) productsList$!: Observable<IPaginatedData<IProduct>>;
   @Select(ProductState.getFilter) productFilters$!: Observable<IProductFilter>;
 
-  constructor( private store: Store, private route: ActivatedRoute, private router: Router, private titleService: Title,private  metaService: Meta) {}
+  constructor(
+              private store: Store,
+               private route: ActivatedRoute,
+               private router: Router,
+               private titleService: Title,
+               private  metaService: Meta
+             )
+             {}
 
 
   ngOnInit(): void {

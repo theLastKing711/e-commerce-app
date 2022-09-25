@@ -24,7 +24,7 @@ export class ProductService {
   }
 
 
-  public filterProductByStars(product: IProduct, stars: number)
+  public filterProductByStars(product: IProduct, stars: number): boolean
   {
 
     if(stars == -1)
