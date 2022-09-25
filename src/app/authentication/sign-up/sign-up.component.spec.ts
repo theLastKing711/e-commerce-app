@@ -21,10 +21,9 @@ describe('SignUpComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ SignUpComponent],
-      imports: [ReactiveFormsModule, HttpClientTestingModule, SharedModule, CardModule],
+      imports: [ReactiveFormsModule, HttpClientTestingModule, SharedModule],
     })
     .compileComponents().then(() => {
-
 
       httpTestingController = TestBed.inject(HttpTestingController);
       testingService = TestBed.inject(TestingHelpersService)

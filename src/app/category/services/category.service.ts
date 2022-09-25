@@ -8,7 +8,7 @@ import { IProduct } from 'src/app/product/product.type';
 @Injectable({
   providedIn: 'root'
 })
-export class CategoryService {
+export class CategoryService implements CategoryService {
 
   categoryApiUrl = `${environment.base_url}AppUserCategories`
 

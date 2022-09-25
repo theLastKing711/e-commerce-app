@@ -1,4 +1,6 @@
+import { ProductState } from './../../store/product.state';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { NgxsModule } from '@ngxs/store';
 
 import { CategoryProductsComponent } from './category-products.component';
 
@@ -8,7 +10,7 @@ describe('CategoryProductsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CategoryProductsComponent ]
+      declarations: [ CategoryProductsComponent, NgxsModule.forRoot([ProductState]) ]
     })
     .compileComponents();
 
@@ -20,4 +22,5 @@ describe('CategoryProductsComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
 });

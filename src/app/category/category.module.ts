@@ -4,9 +4,10 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { CategoryPreviewCardComponent } from './pages/home-page/components/category-preview-card/category-preview-card.component';
-import { ProductsRoutingModule } from './category.routing.module';
+import { CategoryRoutingModule } from './category.routing.module';
 import {CarouselModule} from 'primeng/carousel';
 import { CategoryCarouselComponent } from './pages/home-page/components/category-carousel/category-carousel.component';
+import { TestComponent } from './pages/test/test.component';
 
 
 @NgModule({
@@ -14,12 +15,13 @@ import { CategoryCarouselComponent } from './pages/home-page/components/category
                   HomePageComponent,
                   CategoryPreviewCardComponent,
                   CarouselSliderComponent,
-                  CategoryCarouselComponent
+                  CategoryCarouselComponent,
+                  TestComponent
                 ],
   imports: [
     CommonModule,
     SharedModule,
-    ProductsRoutingModule,
+    CategoryRoutingModule,
     CarouselModule
   ]
 })
