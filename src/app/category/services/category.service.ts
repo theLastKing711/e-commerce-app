@@ -16,11 +16,15 @@ export class CategoryService implements CategoryService {
 
   getCategories(): Observable<ICategory[]> {
 
+    console.log("testing")
+
     return this.httpClient.get<ICategory[]>(this.categoryApiUrl);
 
   }
 
   getCategoryTopSellersProducts(id: number): Observable<IProduct[]> {
+
+    console.log("testing")
 
     const topSellerProductsInCategory = `${this.categoryApiUrl}/${id}/products/bestSeller`
 

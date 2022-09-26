@@ -130,15 +130,15 @@ import { Injectable } from '@angular/core';
           const state = getState();
 
           return this.productService.getProductById(id)
-                             .pipe(
-                              tap(data => {
+                                    .pipe(
+                                      tap(data => {
 
-                                console.log("data", data)
+                                        console.log("data", data)
 
-                                patchState({...state, Product: {...data}})
+                                        patchState({...state, Product: {...data}})
 
-                              })
-                             )
+                                      })
+                                    )
 
         }
 
@@ -154,22 +154,6 @@ import { Injectable } from '@angular/core';
           console.log("new State", newState)
 
         }
-
-        // @Action(GetCategoryProducts)
-        // getCategoryProductsFilterdByPrice({getState, patchState}: StateContext<ProductStateModel>, { payload, pagination, filter }: GetCategoryProductsFilterdByPrice)
-        // {
-        //   return this.productService.getCategoryProducts(payload, pagination, filter)
-        //                      .pipe(
-        //                       tap(data => {
-
-        //                         const state = getState();
-        //                         console.log("state", state)
-        //                         patchState({
-        //                           ...state, Products: {...data}, Filter: {...filter, price: {...filter}}
-        //                         })
-        //                       })
-        //                      )
-        // }
 
 
     }

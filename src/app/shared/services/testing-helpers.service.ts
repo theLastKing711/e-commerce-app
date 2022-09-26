@@ -21,6 +21,15 @@ export class TestingHelpersService {
 
   }
 
+  // getElementsByTestId<T>(fixture: ComponentFixture<T>, testId: string): HTMLElement[] {
+
+  //   const debugElement = fixture.debugElement;
+
+  //   const elements = debugElement.query(By.css(`[test-id='${testId}']`))?.nativeElement as HTMLElement[];
+
+  //   return elements;
+
+  // }
 
   setInputValue<T>(fixture: ComponentFixture<T>, testId: string, value: string): string {
 

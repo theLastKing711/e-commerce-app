@@ -1,4 +1,3 @@
-import { CategoryRoutingModule } from './../../category.routing.module';
 import { NgxsModule, Store } from '@ngxs/store';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
@@ -11,17 +10,16 @@ describe('TestComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CategoryRoutingModule],
-      declarations: [ TestComponent, NgxsModule.forRoot([]) ]
+      imports: [NgxsModule.forRoot([]) ] ,
+      declarations: [ TestComponent]
     })
     .compileComponents();
-
 
     fixture = TestBed.createComponent(TestComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
 
-    store = TestBed.inject(Store);
+    // store = TestBed.inject(Store);
 
   });
 

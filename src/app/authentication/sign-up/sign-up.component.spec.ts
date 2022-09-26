@@ -10,6 +10,7 @@ import { ReactiveFormsModule} from '@angular/forms';
 import { SignUpComponent } from './sign-up.component';
 import { By } from '@angular/platform-browser';
 import { CardModule } from 'primeng/card';
+import { NgxsModule } from '@ngxs/store';
 
 describe('SignUpComponent', () => {
   let component: SignUpComponent;
@@ -21,7 +22,7 @@ describe('SignUpComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ SignUpComponent],
-      imports: [ReactiveFormsModule, HttpClientTestingModule, SharedModule],
+      imports: [ReactiveFormsModule, HttpClientTestingModule, SharedModule, NgxsModule.forRoot([])],
     })
     .compileComponents().then(() => {
 

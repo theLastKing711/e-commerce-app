@@ -18,54 +18,54 @@ export class ProductService {
 
   constructor(private httpClient: HttpClient) { }
 
-  public setSortStrategy(sortStrategy: IProductPriceSortStrategy)
-  {
-    this.sortStrategy = sortStrategy;
-  }
+  // public setSortStrategy(sortStrategy: IProductPriceSortStrategy)
+  // {
+  //   this.sortStrategy = sortStrategy;
+  // }
 
 
-  public filterProductByStars(product: IProduct, stars: number): boolean
-  {
+  // public filterProductByStars(product: IProduct, stars: number): boolean
+  // {
 
-    if(stars == -1)
-    {
-      return true;
-    }
+  //   if(stars == -1)
+  //   {
+  //     return true;
+  //   }
 
-    return product.rating >= stars
-  }
+  //   return product.rating >= stars
+  // }
 
-  private getFilterPriceStrategy(key: SortType): IProductPriceSortStrategy
-  {
-    let sortStratey: IProductPriceSortStrategy;
+  // private getFilterPriceStrategy(key: SortType): IProductPriceSortStrategy
+  // {
+  //   let sortStratey: IProductPriceSortStrategy;
 
-    switch(key)
-    {
-      case(SortType.All):
-      sortStratey = new AllPriceFilter()
-        break;
-      case(SortType.LessThan):
-        sortStratey = new LessThanPriceFilter()
-        break;
-      case(SortType.Range):
-        sortStratey = new RangePriceFilter();
-        break;
-      case(SortType.EqualOrGreaterThan):
-        sortStratey = new GreaterThanOrEqualPriceFilter();
-        break;
-    }
+  //   switch(key)
+  //   {
+  //     case(SortType.All):
+  //     sortStratey = new AllPriceFilter()
+  //       break;
+  //     case(SortType.LessThan):
+  //       sortStratey = new LessThanPriceFilter()
+  //       break;
+  //     case(SortType.Range):
+  //       sortStratey = new RangePriceFilter();
+  //       break;
+  //     case(SortType.EqualOrGreaterThan):
+  //       sortStratey = new GreaterThanOrEqualPriceFilter();
+  //       break;
+  //   }
 
-    return sortStratey;
-  }
+  //   return sortStratey;
+  // }
 
-  public filterProductByPrice(product: IProduct, priceFilter: IProductPriceFilter)
-  {
+  // public filterProductByPrice(product: IProduct, priceFilter: IProductPriceFilter)
+  // {
 
-    this.sortStrategy = this.getFilterPriceStrategy(priceFilter.sortType);
+  //   this.sortStrategy = this.getFilterPriceStrategy(priceFilter.sortType);
 
-    return this.sortStrategy.sort(product, priceFilter)
+  //   return this.sortStrategy.sort(product, priceFilter)
 
-  }
+  // }
 
 
   public getCategoryProducts(categoryId: number,
@@ -90,7 +90,6 @@ export class ProductService {
       params = params.set('query', filter.query)
 
     return this.httpClient.get<IPaginatedData<IProduct>>(apiCategoriesUril, {params: params})
-
 
     }
 

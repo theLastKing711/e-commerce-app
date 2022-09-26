@@ -21,7 +21,6 @@ export class HomePageComponent implements OnInit{
   @Select(CategoryState.getCategoriesList) categoriesList$!: Observable<ICategory[]>;
   @Select(CategoryState.getTopSellerCategoryProducts) topSellerCategoryProducts$!: Observable<IProduct[]>;
 
-
   constructor(private store: Store, private titleService: Title, private metaService: Meta) { }
 
   ngOnInit(): void {

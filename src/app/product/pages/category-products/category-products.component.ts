@@ -37,7 +37,7 @@ export class CategoryProductsComponent implements OnInit, OnDestroy{
                private titleService: Title,
                private  metaService: Meta
              )
-             {}
+            {}
 
 
   ngOnInit(): void {
@@ -54,7 +54,7 @@ export class CategoryProductsComponent implements OnInit, OnDestroy{
 
         map(([filter]) => {
 
-          console.log("third")
+          console.log("new Id", this.id)
 
           this.store.dispatch(new GetCategoryProducts(
             this.id,

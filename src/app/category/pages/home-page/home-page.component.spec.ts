@@ -1,3 +1,7 @@
+import { SharedModule } from './../../../shared/shared.module';
+import { IProduct } from 'src/app/product/product.type';
+import { ICategory } from './../../category.type';
+import { GetCategories } from './../../store/category.action';
 import { FakeCategoryService } from './../../fakeServcies/fake-category.service';
 import { CategoryService } from './../../services/category.service';
 import { CategoryState } from './../../store/category.state';
@@ -6,66 +10,43 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { HomePageComponent } from './home-page.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { Component } from '@angular/core';
-import { CarouselModule } from 'primeng/carousel';
-import { CategoryRoutingModule } from '../../category.routing.module';
-import { SharedModule } from 'primeng/api';
-import { CommonModule } from '@angular/common';
-import { CardModule } from 'primeng/card';
-import { ButtonModule } from 'primeng/button';
-import { ReactiveFormsModule } from '@angular/forms';
-import { FileUploadModule } from 'primeng/fileupload';
-import { CoreModule } from 'src/app/core/core.module';
-import { AppRoutingModule } from 'src/app/app-routing.module';
-import { BrowserModule } from '@angular/platform-browser';
+import { TestingHelpersService } from 'src/app/shared/services/testing-helpers.service';
+
 
 describe('HomePageComponent', () => {
   let component: HomePageComponent;
   let fixture: ComponentFixture<HomePageComponent>;
 
 
-  @Component({selector: 'app-carousel-slider', template: ''})
-  class CarouselSliderStub {}
+  // @Component({selector: 'app-carousel-slider', template: ''})
+  // class CarouselSliderStub {}
 
-  @Component({selector: 'app-category-preview-card', template: ''})
-  class CategoryPreviewCardStub { }
+  // @Component({selector: 'app-category-preview-card', template: ''})
+  // class CategoryPreviewCardStub { }
 
-  @Component({selector: 'app-category-carousel', template: ''})
-  class CategoryCarouselStub {}
-
+  // @Component({selector: 'app-category-carousel', template: ''})
+  // class CategoryCarouselStub {}
+  let testingService: TestingHelpersService;
   let store: Store;
 
   beforeEach(async () => {
 
     await TestBed.configureTestingModule({
       imports: [
-        HttpClientTestingModule,
-        CommonModule,
+        // HttpClientTestingModule,
         SharedModule,
-        CategoryRoutingModule,
-        CarouselModule,
-        BrowserModule,
-        AppRoutingModule,
-        CardModule,
-        ButtonModule,
-        ReactiveFormsModule,
-        FileUploadModule,
-        SharedModule,
-        CoreModule,
-        AppRoutingModule,
+        NgxsModule.forRoot([CategoryState])
       ],
-      declarations: [ HomePageComponent, NgxsModule.forRoot([CategoryState]),
-      CarouselSliderStub, CategoryCarouselStub, CategoryPreviewCardStub
-    ],
-      providers: [{CategoryService, useClass: FakeCategoryService}, ]
+      declarations: [ HomePageComponent],
+      providers: [{ provide: CategoryService, useClass: FakeCategoryService }]
     })
     .compileComponents();
 
     fixture = TestBed.createComponent(HomePageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-
-    // store = TestBed.inject(Store);
+    testingService = TestBed.inject(TestingHelpersService)
+    store = TestBed.inject(Store);
 
   });
 
@@ -73,4 +54,38 @@ describe('HomePageComponent', () => {
 
     expect(component).toBeTruthy();
   });
+
+  it('categories List should have items on startup', async () => {
+
+
+    // const mainCategories = store.selectSnapshot(CategoryState.getCategoriesList);
+
+    let categoriesList: ICategory[] = [];
+
+    component.categoriesList$.subscribe(x => {
+      categoriesList = [...x]
+    })
+
+
+    expect(categoriesList.length).toBe(3);
+
+  })
+
+  it("top selleing products list should have items on startup", async () => {
+
+    // const topSellingProduct = store.selectSnapshot(CategoryState.getTopSellerCategoryProducts);
+
+    let topSellingProducts: IProduct[] = [];
+
+    component.topSellerCategoryProducts$.subscribe(x =>
+      {
+        topSellingProducts = [...x];
+      }
+    )
+
+    expect(topSellingProducts.length).toBe(3);
+
+
+  })
+
 });

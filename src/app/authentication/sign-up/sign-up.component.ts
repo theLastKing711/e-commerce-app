@@ -1,3 +1,4 @@
+import { Store } from '@ngxs/store';
 import { Title, Meta } from '@angular/platform-browser';
 import { IRegister } from './../types/auth.model';
 import { AuthService } from './../services/auth.service';
@@ -15,7 +16,9 @@ export class SignUpComponent implements OnInit,OnDestroy {
 
   signUpSubscription!: Subscription;
 
-  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router,private titleService: Title, private metaService: Meta) { }
+  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router,private titleService: Title, private metaService: Meta,
+    private store: Store
+    ) { }
 
   signUpForm  = this.fb.group({
     username: ['', Validators.required],
