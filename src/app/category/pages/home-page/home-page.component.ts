@@ -4,7 +4,7 @@ import { ICategory } from './../../category.type';
 import { Observable } from 'rxjs';
 import { CategoryState } from './../../store/category.state';
 import { GetCategories } from '../../store/category.action';
-import { AfterContentChecked, Component, OnInit, AfterViewInit, AfterContentInit } from '@angular/core';
+import {  Component, OnInit } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
 import { categoryPhotos } from '../../category.constants';
 import { Meta, Title } from '@angular/platform-browser';
