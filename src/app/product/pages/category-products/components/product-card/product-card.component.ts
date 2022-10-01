@@ -43,6 +43,21 @@ export class ProductCardComponent implements OnInit {
 
   }
 
+  isProductAvailableAndLowOnStock(product: IProduct): boolean
+  {
+    return this.isProductAvailable(product) && this.isProductLowOnStock(product);
+  }
+
+  isProductAvailable(product: IProduct): boolean
+  {
+    return product.inventoryCurrentAmount > 0;
+  }
+
+  isProductLowOnStock(product: IProduct): boolean
+  {
+    return product.inventoryCurrentAmount <= 10;
+  }
+
   linkClicked(id: number)
   {
     this.NavigationLinkClicked.emit(id);

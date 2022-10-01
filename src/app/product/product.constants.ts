@@ -147,7 +147,8 @@ export const defaultProduct: IProduct = {
   thumbImagePath: "",
   fullImagePath: "",
   discountValue: 0,
-  priceAfterDiscount: 0
+  priceAfterDiscount: 0,
+  inventoryCurrentAmount: 0
 
 }
 

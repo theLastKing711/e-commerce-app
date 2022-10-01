@@ -40,6 +40,10 @@
       </a>
     </div>
 
+    <div class="product-card__is-product-low-on-stock" *ngIf="isProductAvailableAndLowOnStock(product)">
+      Only {{ product.inventoryCurrentAmount }} left in stock - order soon.
+    </div>
+
   </ng-template>
 
 </p-card>

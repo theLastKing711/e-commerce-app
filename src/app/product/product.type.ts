@@ -18,7 +18,7 @@ export interface IProduct extends IProductBase {
   fullImagePath: string;
   discountValue: number;
   priceAfterDiscount: number;
-
+  inventoryCurrentAmount: number;
 }
 
 export interface IDetails {

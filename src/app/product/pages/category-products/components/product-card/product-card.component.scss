@@ -168,6 +168,11 @@ a {
       line-height: 1;
     }
 
+    &__is-product-low-on-stock {
+      color: #B12704;
+      font-size: 0.875rem;
+    }
+
     &__before-discount-price {
       font-size: 0.9rem;
       text-decoration: line-through;
