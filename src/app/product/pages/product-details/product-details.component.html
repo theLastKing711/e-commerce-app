@@ -1,12 +1,8 @@
-<ng-container>
-
-</ng-container>
 <div class="product-details custom-container mx-auto mt-4 px-4">
 
   <div class="product-details-description">
 
     <div class="product-details-description__image-container">
-      <!-- <img [src]="(product$ | async)?.path" alt="product image" class="product-details-description__image" /> -->
       <lib-ngx-image-zoom
       [thumbImage]="product.thumbImagePath"
       [fullImage]="product.fullImagePath"
@@ -17,9 +13,6 @@
       [lensHeight]="150"
       >
       </lib-ngx-image-zoom>
-
-      <!-- <img src="https://m.media-amazon.com/images/W/WEBP_402378-T1/images/I/71rXSVqET9L._AC_SX679_.jpg" alt="product-image" /> -->
-
 
       <div class="product-details-description__quantity">
         <p-inputNumber
@@ -49,35 +42,85 @@
 
    </div>
 
-    <div class="product-details-description__container">
+
+
+    <div class="product-details-description__container"  *ngIf="(product$ | async) as product">
 
       <section class="product-details-description__main-details pb-1 product-details-section">
-        <h1> {{ (product$ | async)?.name }} </h1>
+        <h1> {{ product.name }} </h1>
 
         <div class="product-details-description__reviews d-flex gap-3">
-          <p-rating [ngModel]="(product$ | async)?.rating" [readonly]="true" [cancel]="false" ></p-rating>
-          <span> {{ (product$ | async)?.totalReviews }} ratings </span>
+
+          <div
+            class="product-details-description__review-rating-container"
+            appHoverState
+            (itemHovered)="handleItemHovered($event)"
+
+          >
+            <p-rating
+              class="product-details-description__review-rating"
+              [ngModel]="product.rating"
+              [readonly]="true"
+              [cancel]="false"
+            >
+            </p-rating>
+            <app-product-details-review-stats
+                *ngIf="(productReviewDetails$ | async) as reviewDetails"
+                [productReviewStats]="reviewDetails"
+                [isViewActive]="isReviewRatingListActive"
+            >
+
+            </app-product-details-review-stats>
+
+          </div>
+          <span> {{ product.totalReviews }} ratings </span>
         </div>
       </section>
 
       <section class="product-details-description__pricing product-details-section">
 
-        <div class="product-details-description__main-price">
-
+        <div class="product-details-description__main-price"  [hidden]="isProductDiscounted(product)">
           <span class="product-details-description__main-price-title">Price:</span>
           <span class="product-details-description__main-price-value">
-            ${{ (product$ | async)?.price }}
+            ${{ product.price }}
           </span>
-
         </div>
+
+        <div class="product-details-description__price-saving" *ngIf="isProductDiscounted(product)">
+            <p>
+              <span class="product-details-description__price-saving-title">List Price: </span>
+              <span class="product-details-description__old-price">
+                ${{ product.price }}
+              </span>
+            </p>
+            <p>
+              <span class="product-details-description__price-saving-title">
+                Price:
+              </span>
+              <span class="product-details-description__new-price">
+                ${{ product.priceAfterDiscount }}
+              </span>
+            </p>
+            <p>
+              <span class="product-details-description__price-saving-title">
+                You Save:
+              </span>
+              <span class="product-details-description__saving-values">
+               ${{ getProductSavingPercent(product) }} ({{ product.discountValue }}%)
+              </span>
+            </p>
+        </div>
+
 
       </section>
 
       <section class="product-details-description__about product-details-section">
         <h2 class="product-details-description__about-title">About this item</h2>
         <ul class="product-details-description__about-list">
-          <li class="product-details-description__about-list-item" *ngFor="let detail of (product$ | async)?.details!">
+          <li class="product-details-description__about-list-item" *ngFor="let detail of product.details">
             {{  detail.text }}
           </li>
         </ul>
       </section>
+    </div>
+

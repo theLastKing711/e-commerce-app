@@ -1,5 +1,6 @@
 import { IProduct } from '../../../../product.type';
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { ProductPricingService } from 'src/app/product/services/product-pricing.service';
 
 @Component({
   selector: 'app-product-card',
@@ -13,7 +14,7 @@ export class ProductCardComponent implements OnInit {
   @Output() NavigationLinkClicked: EventEmitter<number> = new EventEmitter<number>();
   @Output() ProductLinkClicked: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-  constructor() { }
+  constructor(public productPricingService: ProductPricingService) { }
 
   ngOnInit(): void {
   }
@@ -24,6 +25,15 @@ export class ProductCardComponent implements OnInit {
     return isBestSeller == true;
   }
 
+  isProductDiscounted(product: IProduct)
+  {
+    return this.productPricingService.isProductDiscounted(product);
+  }
+
+  calculateActualProductPrice(product: IProduct)
+  {
+    return this.productPricingService.calculateActualProductPrice(product);
+  }
 
   showBestSellerLabel(isBestSeller: boolean): string {
 

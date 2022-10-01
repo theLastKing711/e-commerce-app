@@ -168,6 +168,12 @@ a {
       line-height: 1;
     }
 
+    &__before-discount-price {
+      font-size: 0.9rem;
+      text-decoration: line-through;
+      color: #565959;
+    }
+
     &__currency {
       color: #0F1111 !important;
       font-weight: 400 !important;

@@ -19,6 +19,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgxsModule } from '@ngxs/store';
 import { NgxsStoragePluginModule } from '@ngxs/storage-plugin';
 import { TokenInterceptor } from './Interceptors/TokenInterceptor';
+import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { TokenInterceptor } from './Interceptors/TokenInterceptor';
     SharedModule,
     CoreModule,
     NgxsModule.forRoot([ProductState, CategoryState, SharedState, AuthState]),
+    NgxsReduxDevtoolsPluginModule.forRoot(),
     NgxsStoragePluginModule.forRoot({
       key: [
           'shared.ProductsCart.productInvoiceDetails',

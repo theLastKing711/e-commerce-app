@@ -47,9 +47,10 @@ import { IProductFilter } from './../product.type';
     }
 
 
-    // export class GetCategoryProductsFilterdByPrice {
-    //   static readonly type = '[Product Get category products filtered by price]';
+    export class GetProductReviewStats {
+      static readonly type = '[Api] Get Product Review Stats'
 
-    //   constructor(public payload: number){}
-    // }
+
+      constructor(public id: number) {}
+    }
 

@@ -145,7 +145,9 @@ export const defaultProduct: IProduct = {
   rating: 0,
   details: [],
   thumbImagePath: "",
-  fullImagePath: ""
+  fullImagePath: "",
+  discountValue: 0,
+  priceAfterDiscount: 0
 
 }
 

@@ -3,7 +3,7 @@ import { IPagination, IPaginatedData } from '../../shared/shared.type';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { IProductPriceSortStrategy, LessThanPriceFilter, RangePriceFilter, AllPriceFilter, GreaterThanOrEqualPriceFilter } from '../models/ProductPriceSortStrategy';
-import { IProductPriceFilter, SortType, IProductFilter } from '../product.type';
+import { IProductPriceFilter, SortType, IProductFilter, IProductReviewStats } from '../product.type';
 import { Injectable } from '@angular/core';
 import { IProduct } from '../product.type';
 
@@ -96,11 +96,18 @@ export class ProductService {
     public getProductById(id: number): Observable<IProduct>
     {
 
-    const apiCategoriesUril = `${environment.base_url}AppUserProducts/${id}`;
+    const apiCategoriesUrl = `${environment.base_url}AppUserProducts/${id}`;
 
-    return this.httpClient.get<IProduct>(apiCategoriesUril)
+    return this.httpClient.get<IProduct>(apiCategoriesUrl)
 
 
+    }
+
+    public getProductReviewStats(id: number): Observable<IProductReviewStats>
+    {
+      const productReviewStatsUrl = `${environment.base_url}AppUserProducts/${id}/reviewStats`;
+
+      return this.httpClient.get<IProductReviewStats>(productReviewStatsUrl);
     }
 
 }

@@ -3,7 +3,6 @@
 <p-card class="product-card d-block h-100">
 
 
-
   <ng-template pTemplate="header">
     <span *ngIf="isProductBestsSeller(product.isBestSeller)">
       Best Seller
@@ -29,7 +28,15 @@
         $
       </div>
       <a class="product-card__price" [routerLink]="['/categories', product.categoryId, 'products', product.id]">
-        {{ product.price}}
+        <span class="product-card__actual-price">
+          {{ calculateActualProductPrice(product) }}
+        </span>
+        <span
+          class="product-card__before-discount-price"
+          *ngIf="isProductDiscounted(product)"
+        >
+          ${{ product.price}}
+        </span>
       </a>
     </div>
 

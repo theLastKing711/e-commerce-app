@@ -1,0 +1,33 @@
+
+<div
+  class="review__container"
+  [ngClass]="{'review__container--active': isActive(isViewActive)}"
+>
+
+  <div class="review__header">
+    <p-rating
+              class="product-details-description__review-rating"
+              [ngModel]="productReviewStats.totalRating"
+              [readonly]="true"
+              [cancel]="false"
+      >
+    </p-rating>
+    <div class="review__header-title">
+      {{ productReviewStats.totalRating}} out of 5
+    </div>
+  </div>
+
+  <ul class="review__review-rating-list" >
+    <li *ngFor="let review of productReviewStats.starStats">
+      <p class="review__review-rating-stars-container">
+        <span class="review__review-stars-title">{{ review.stars }} star</span>
+        <p-progressBar [value]="review.totalReviews"  ></p-progressBar>
+        <span class="review__review-stars-percent">{{ review.totalReviews.toFixed(0) }}%</span>
+      </p>
+    </li>
+  </ul>
+
+  <div class="review__invisible-hover-area"></div>
+
+</div>
+

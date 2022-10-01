@@ -15,6 +15,7 @@ import {PaginatorModule} from 'primeng/paginator';
 import { ShoppingCartComponent } from './pages/shopping-cart/shopping-cart.component';
 import { ProductCartCardComponent } from './pages/shopping-cart/components/product-cart-card/product-cart-card.component';
 import { ProductSearchResultComponent } from './pages/product-search-result/product-search-result.component';
+import { ProductDetailsReviewStatsComponent } from './pages/product-details/components/product-details-review-stats/product-details-review-stats.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { ProductSearchResultComponent } from './pages/product-search-result/prod
     ProductDetailsComponent,
     ShoppingCartComponent,
     ProductCartCardComponent,
-    ProductSearchResultComponent
+    ProductSearchResultComponent,
+    ProductDetailsReviewStatsComponent
   ],
   imports: [
     CommonModule,

@@ -3,8 +3,8 @@ import { defaultPagination, defaultProduct, defaultProductsFilter } from '../pro
 import { IPaginatedData, IPagination } from '../../shared/shared.type';
 import {  tap } from 'rxjs';
 import { ProductService } from '../services/product.service';
-import { UpdateFilter, GetCategoryProducts, ResetCategoryProducts, ResetCategoryProductsFilter, UpdateProductPagination, GetProductById, ResetProduct } from './product.action';
-import { IProductFilter } from '../product.type';
+import { UpdateFilter, GetCategoryProducts, ResetCategoryProducts, ResetCategoryProductsFilter, UpdateProductPagination, GetProductById, ResetProduct, GetProductReviewStats } from './product.action';
+import { IProductFilter, IProductReviewStats } from '../product.type';
 import { IProduct } from '../product.type';
 import { State, Selector, Action, StateContext } from '@ngxs/store';
 import { Injectable } from '@angular/core';
@@ -15,6 +15,7 @@ import { Injectable } from '@angular/core';
         Filter!: IProductFilter;
         Pagination!: IPagination;
         Product!: IProduct;
+        productReviewStats!: IProductReviewStats
     }
 
     @State<ProductStateModel>({
@@ -26,6 +27,7 @@ import { Injectable } from '@angular/core';
             },
             Pagination: {...defaultPagination},
             Product: {...defaultProduct},
+            productReviewStats: {} as IProductReviewStats
         }
     })
 
@@ -55,6 +57,10 @@ import { Injectable } from '@angular/core';
           return state.Product
         }
 
+        @Selector()
+        static getProductReviewsDetails(state: ProductStateModel) {
+          return state.productReviewStats;
+        }
 
         @Action(UpdateFilter)
         updateFilter<T extends keyof IProductFilter>({getState, setState}: StateContext<ProductStateModel>, {payload : {filter, filterValue}} : UpdateFilter<T>) {
@@ -137,6 +143,8 @@ import { Injectable } from '@angular/core';
 
                                         patchState({...state, Product: {...data}})
 
+                                        console.log("new states", getState())
+
                                       })
                                     )
 
@@ -152,6 +160,29 @@ import { Injectable } from '@angular/core';
           const newState = getState();
 
           console.log("new State", newState)
+
+        }
+
+
+        @Action(GetProductReviewStats)
+        getProductReviewStats({getState, patchState}: StateContext<ProductStateModel>, { id } : GetProductReviewStats)
+        {
+          const state = getState();
+
+          return this.productService.getProductReviewStats(id)
+                             .pipe(
+                              tap(data => {
+
+                                console.log("oldState", state);
+
+                                patchState({...state, productReviewStats: {...data}})
+
+                                const newState = getState();
+
+                                console.log("newState", newState);
+
+                              })
+                             )
 
         }
 

@@ -8,12 +8,14 @@ import {ButtonModule} from 'primeng/button';
 import { CustomPrimePaginatorComponent } from './components/custom-prime-paginator/custom-prime-paginator.component';
 import { NgxImageZoomModule } from 'ngx-image-zoom';
 import { InputNumberModule } from 'primeng/inputnumber';
-import {DropdownModule} from 'primeng/dropdown';
+import {ProgressBarModule} from 'primeng/progressbar';
+import { HoverStateDirective } from '../hover-state.directive';
 
 @NgModule({
   declarations: [
     MatchHeightDirective,
     CustomPrimePaginatorComponent,
+    HoverStateDirective,
 
   ],
   imports: [
@@ -23,7 +25,8 @@ import {DropdownModule} from 'primeng/dropdown';
     ButtonModule,
     PaginatorModule,
     NgxImageZoomModule,
-    InputNumberModule
+    InputNumberModule,
+    ProgressBarModule
   ],
   exports: [
     MatchHeightDirective,
@@ -32,7 +35,9 @@ import {DropdownModule} from 'primeng/dropdown';
     CustomPrimePaginatorComponent,
     NgxImageZoomModule,
     ButtonModule,
-    InputNumberModule
+    InputNumberModule,
+    ProgressBarModule,
+    HoverStateDirective
   ]
 })
 export class SharedModule { }

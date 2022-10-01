@@ -16,6 +16,8 @@ export interface IProduct extends IProductBase {
   details: IDetails[];
   thumbImagePath: string;
   fullImagePath: string;
+  discountValue: number;
+  priceAfterDiscount: number;
 
 }
 
@@ -85,4 +87,16 @@ export interface IProductItem {
 
 export interface IProductCartItem extends IProduct {
   productQuantity: number;
+}
+
+
+export interface IProductReviewStats {
+
+  totalRating: number;
+  starStats: IProductReviewStatsDetails[]
+}
+
+export interface IProductReviewStatsDetails {
+  stars: number;
+  totalReviews: number;
 }
