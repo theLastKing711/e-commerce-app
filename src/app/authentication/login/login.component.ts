@@ -22,7 +22,14 @@ export class LoginComponent implements OnInit {
 
   errorMessage!: string;
 
-  constructor(private fb: FormBuilder, private store: Store, private errorHandlerServise: ErrorHandlerService,private titleService: Title, private  metaService: Meta) { }
+  constructor(
+    private fb: FormBuilder,
+    private store: Store,
+    private errorHandlerServise: ErrorHandlerService,
+    private titleService: Title,
+    private router: Router,
+    private  metaService: Meta
+    ) { }
 
   loginForm  = this.fb.group({
     username: ['', Validators.required],
@@ -45,6 +52,7 @@ export class LoginComponent implements OnInit {
     this.metaService.addTag({name: 'description', content: 'Log In To E-commerce and explore new world of shopping'})
 
     this.errorSubscription = this.errorHandlerServise.ErrorMessage.subscribe(errorMessage => {
+
       this.errorMessage = errorMessage
     })
   }
@@ -63,7 +71,9 @@ export class LoginComponent implements OnInit {
 
     this.loginSubscription =  this.store.dispatch(new LogInUser(userLoginData))
     .subscribe({
-      next: () => {},
+      next: () => {
+        this.router.navigate(['/'])
+      },
       error:
         this.errorHandlerServise.handleError.bind(this.errorHandlerServise)
     })

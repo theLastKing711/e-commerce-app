@@ -4,7 +4,7 @@ import { ICategory } from './../../category.type';
 import { Observable } from 'rxjs';
 import { CategoryState } from './../../store/category.state';
 import { GetCategories } from '../../store/category.action';
-import {  Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
 import { categoryPhotos } from '../../category.constants';
 import { Meta, Title } from '@angular/platform-browser';
@@ -21,7 +21,9 @@ export class HomePageComponent implements OnInit{
   @Select(CategoryState.getCategoriesList) categoriesList$!: Observable<ICategory[]>;
   @Select(CategoryState.getTopSellerCategoryProducts) topSellerCategoryProducts$!: Observable<IProduct[]>;
 
-  constructor(private store: Store, private titleService: Title, private metaService: Meta) { }
+  constructor(private store: Store, private titleService: Title, private metaService: Meta, v: ViewContainerRef) {
+    console.log("view container 0", v);
+   }
 
   ngOnInit(): void {
 

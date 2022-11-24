@@ -12,14 +12,14 @@
         </ng-template>
 
           <div class="form-field  mb-4 ">
-            <input type="text" pInputText class="w-100 p-2" placeholder="username" formControlName="username">
+            <input type="text" pInputText class="w-100 p-2 mb-2" placeholder="username" formControlName="username">
             <p *ngIf="hasRequiredError('username')" id="username-error" class="p-error" >
               Username is Required
             </p>
           </div>
 
           <div class="form-field mb-2">
-            <input type="password" pInputText class="w-100 p-2" placeholder="password" formControlName="password">
+            <input type="password" pInputText class="w-100 p-2 mb-2" placeholder="password" formControlName="password">
             <p *ngIf="hasRequiredError('password')" id="password-error" class="p-error">
               Password is Required
             </p>

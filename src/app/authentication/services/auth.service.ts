@@ -16,6 +16,24 @@ export class AuthService {
 
   authUrl: string = `${environment.base_url}appUsers`;
 
+
+  validateUsernameDuplication(username: string): Observable<boolean> {
+
+    const checkUsernameUrl = `${environment.base_url}authenticate/check-username/${username}`
+
+    return this.httpClient.get<boolean>(checkUsernameUrl)
+
+  }
+
+  validateEmailDuplication(email: string): Observable<boolean> {
+
+    const checkEmailUrl = `${environment.base_url}authenticate/check-email/${email}`
+
+    return this.httpClient.get<boolean>(checkEmailUrl)
+
+  }
+
+
   register(userFormData: any): Observable<IResponse> {
 
     const registerUrl = `${this.authUrl}`;

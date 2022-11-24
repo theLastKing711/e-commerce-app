@@ -15,6 +15,7 @@ export class CategoryPreviewCardComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    console.log("image", this.image);
   }
 
 }

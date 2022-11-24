@@ -45,6 +45,8 @@ import { ICategory } from './../category.type';
                              .pipe(
                               tap(data => {
 
+                                console.log("data", data);
+
                                 const state = getState();
                                 console.log("state", state)
                                 patchState({

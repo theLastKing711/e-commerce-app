@@ -24,6 +24,7 @@ export class ShoppingCartComponent implements OnInit {
 
   ngOnInit(): void {
 
+
     this.titleService.setTitle("E-commerce.com checkout Purchased Item")
     this.metaService.addTag({name: "description", content: "please checkout Purchased Items to buy Purchased products"})
 

@@ -1,4 +1,4 @@
-<main class="products-main">
+<main class="products-main" *ngIf="productsList$ | async">
   <app-products-side-bar
     [starsFilterOptions]="starsFilterOptions"
     [priceFilterOptions]="priceFilterOptions"

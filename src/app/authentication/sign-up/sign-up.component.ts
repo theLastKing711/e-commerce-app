@@ -6,6 +6,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { UniqueEmailValidatorService } from '../services/validators/unique-email-validator.service';
+import { UniqueUsernameValidatorService } from '../services/validators/unique-username-validator.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -17,12 +19,14 @@ export class SignUpComponent implements OnInit,OnDestroy {
   signUpSubscription!: Subscription;
 
   constructor(private fb: FormBuilder, private authService: AuthService, private router: Router,private titleService: Title, private metaService: Meta,
-    private store: Store
+    private store: Store,
+    private  uniqueUsernameValidatorService: UniqueUsernameValidatorService,
+    private  uniqueEmailValidatorService: UniqueEmailValidatorService
     ) { }
 
   signUpForm  = this.fb.group({
-    username: ['', Validators.required],
-    email: ['', [Validators.required, Validators.email]],
+    username: ['', Validators.required, this.uniqueUsernameValidatorService.validate.bind(this.uniqueUsernameValidatorService)],
+    email: ['', [Validators.required, Validators.email], this.uniqueEmailValidatorService.validate.bind(this.uniqueEmailValidatorService)],
     password: ['', Validators.required]
   })
 
@@ -77,6 +81,10 @@ export class SignUpComponent implements OnInit,OnDestroy {
 
     return  this.isEmpty(key) && (! this.isPristine(key));
 
+  }
+
+  hasDuplicatedError(key: string): boolean | undefined {
+    return this.signUpForm.get(key)?.hasError(`${key}IsDuplicated`);
   }
 
   hasEmailFormatError(key: string) {

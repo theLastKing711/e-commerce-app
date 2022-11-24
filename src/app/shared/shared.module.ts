@@ -10,12 +10,14 @@ import { NgxImageZoomModule } from 'ngx-image-zoom';
 import { InputNumberModule } from 'primeng/inputnumber';
 import {ProgressBarModule} from 'primeng/progressbar';
 import { HoverStateDirective } from '../hover-state.directive';
+import { DelayRenderingDirective } from './directives/delay-rendering.directive';
 
 @NgModule({
   declarations: [
     MatchHeightDirective,
     CustomPrimePaginatorComponent,
     HoverStateDirective,
+    DelayRenderingDirective,
 
   ],
   imports: [
@@ -37,7 +39,8 @@ import { HoverStateDirective } from '../hover-state.directive';
     ButtonModule,
     InputNumberModule,
     ProgressBarModule,
-    HoverStateDirective
+    HoverStateDirective,
+    DelayRenderingDirective
   ]
 })
 export class SharedModule { }
