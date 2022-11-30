@@ -41,7 +41,7 @@ export class SearchBarComponent implements OnInit {
     setTimeout(() => {
       this.searchInputBlurred.emit(true)
 
-    }, 100)
+    }, 300)
 
   }
 

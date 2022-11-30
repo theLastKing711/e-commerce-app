@@ -32,6 +32,7 @@ export class ShoppingCartComponent implements OnInit {
     this.metaService.addTag({name: "description", content: "please checkout Purchased Items to buy Purchased products"})
 
     this.store.dispatch(new GetCartProductsFromApi());
+
   }
 
   onProductItemDeleteClicked(event: number)
