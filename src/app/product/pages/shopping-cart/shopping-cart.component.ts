@@ -1,7 +1,9 @@
+import { IToken } from './../../../authentication/types/auth.model';
+import { AuthState } from './../../../authentication/store/authentication.state';
 import { Title, Meta } from '@angular/platform-browser';
 import { IProductInvoiceDetails } from 'src/app/product/product.type';
 import { RemoveProductFromCart, UpdateProductInCart } from './../../../shared/store/shared.action';
-import { Observable } from 'rxjs';
+import { Observable, share, shareReplay, tap } from 'rxjs';
 import { SharedState } from './../../../shared/store/shared.state';
 import { Component, OnInit } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
@@ -19,6 +21,7 @@ export class ShoppingCartComponent implements OnInit {
   @Select(SharedState.getCartItemsTotalPrice) cartTotalPrice!: Observable<number>;
   @Select(SharedState.getCartItemsCount) cartItemsCount!: Observable<number>;
 
+  @Select(AuthState.getLoggedInUser) loggedUser!: Observable<IToken | null>;
 
   constructor(private store: Store, private titleService: Title, private metaService: Meta) { }
 
@@ -50,10 +53,10 @@ export class ShoppingCartComponent implements OnInit {
     this.store.dispatch(new UpdateProductInCart(product));
   }
 
-
   trackByProductFn(index: number, product: IProductInvoiceDetails)
   {
     return product.id;
   }
+
 
 }

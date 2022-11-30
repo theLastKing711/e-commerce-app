@@ -31,7 +31,6 @@ export class SearchBarComponent implements OnInit {
 
   onInputFocused()
   {
-
     this.isInputFocused = true;
   }
 

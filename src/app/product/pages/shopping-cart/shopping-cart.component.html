@@ -43,7 +43,10 @@
           {{ '$' + (cartTotalPrice | async) }}
         </span>
       </p>
-      <button class="shopping-card__checkout-button">Checkout</button>
+      <button [disabled]="! (loggedUser | async)" class="shopping-card__checkout-button">Checkout</button>
+      <p *ngIf="! (loggedUser | async)" class="mt-4">
+        Please <a routerLink="/login">sign in </a> first
+      </p>
     </p-card>
   </div>
 
