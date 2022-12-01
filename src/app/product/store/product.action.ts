@@ -1,5 +1,5 @@
 import { IPagination } from './../../shared/shared.type';
-import { IProductFilter } from './../product.type';
+import { IProductFilter, IProductInvoice } from './../product.type';
 
 
     export class UpdateFilter<T extends keyof IProductFilter> {
@@ -53,4 +53,6 @@ import { IProductFilter } from './../product.type';
 
       constructor(public id: number) {}
     }
+
+
 

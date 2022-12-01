@@ -65,6 +65,18 @@ export interface IProductInvoice {
 
 }
 
+export interface IAddProductInvoice {
+
+  appUserId: number;
+  invoicesDetails: IAddProductInvoiceDetails[];
+
+}
+
+export interface IAddProductInvoiceDetails {
+  productId: number;
+  productQuantity: number;
+}
+
 export interface IProductInvoiceDetails {
 
   id: number;

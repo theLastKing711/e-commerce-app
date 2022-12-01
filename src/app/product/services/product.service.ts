@@ -1,3 +1,4 @@
+import { IProductInvoice } from './../product.type';
 import { Observable } from 'rxjs';
 import { IPagination, IPaginatedData } from '../../shared/shared.type';
 import { HttpClient, HttpParams } from '@angular/common/http';
@@ -96,10 +97,9 @@ export class ProductService {
     public getProductById(id: number): Observable<IProduct>
     {
 
-    const apiCategoriesUrl = `${environment.base_url}AppUserProducts/${id}`;
+      const apiCategoriesUrl = `${environment.base_url}AppUserProducts/${id}`;
 
-    return this.httpClient.get<IProduct>(apiCategoriesUrl)
-
+      return this.httpClient.get<IProduct>(apiCategoriesUrl)
 
     }
 
@@ -109,5 +109,6 @@ export class ProductService {
 
       return this.httpClient.get<IProductReviewStats>(productReviewStatsUrl);
     }
+
 
 }

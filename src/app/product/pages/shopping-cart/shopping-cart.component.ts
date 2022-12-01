@@ -1,8 +1,9 @@
+import { IProductInvoice, IAddProductInvoice } from './../../product.type';
 import { IToken } from './../../../authentication/types/auth.model';
 import { AuthState } from './../../../authentication/store/authentication.state';
 import { Title, Meta } from '@angular/platform-browser';
 import { IProductInvoiceDetails } from 'src/app/product/product.type';
-import { RemoveProductFromCart, UpdateProductInCart } from './../../../shared/store/shared.action';
+import { PurchaseItems, RemoveProductFromCart, ResetProductsCart, UpdateProductInCart } from './../../../shared/store/shared.action';
 import { Observable, share, shareReplay, tap } from 'rxjs';
 import { SharedState } from './../../../shared/store/shared.state';
 import { Component, OnInit } from '@angular/core';
@@ -52,6 +53,19 @@ export class ShoppingCartComponent implements OnInit {
     console.log("product", product)
 
     this.store.dispatch(new UpdateProductInCart(product));
+  }
+
+  onProductsPurchasedSubmit(cartProducts: IProductInvoice)
+  {
+
+    const apiCartProducts: IAddProductInvoice = {
+      appUserId: cartProducts.appUserId,
+      invoicesDetails: cartProducts.productInvoiceDetails.map(x => ({productId: x.id, productQuantity: x.productQuantity}))
+    }
+
+    this.store.dispatch(new PurchaseItems(apiCartProducts)).subscribe(x => {
+      this.store.dispatch(new ResetProductsCart());
+    })
   }
 
   trackByProductFn(index: number, product: IProductInvoiceDetails)

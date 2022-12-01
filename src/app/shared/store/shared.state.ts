@@ -1,13 +1,11 @@
-import { IProduct } from 'src/app/product/product.type';
-import { StorageService } from './../services/storage.service';
-import { ICategoryItem } from './../../category/category.type';
+import { AlertifyService } from './../services/alertify.service';
+
 import { IProductInvoice, IProductItem, IProductInvoiceDetails, IProductCartItem } from './../../product/product.type';
-import { tap, map, debounce, debounceTime, filter } from 'rxjs';
+import { tap, debounceTime } from 'rxjs';
 import { Injectable } from "@angular/core";
 import { Action, Selector, State, StateContext } from "@ngxs/store";
 import { SharedService } from "../services/shared.service";
-import { AddToProductsCart, GlobalSearch, SetSearchBarActive, SetSearchBarInActive, ResetSearchList, UpdateProductInCart, OpenMobileSideBar, CloseMobileSideBar, RemoveProductFromCart, GetCartProductsFromApi } from './shared.action';
-import { state } from '@angular/animations';
+import { AddToProductsCart, GlobalSearch, SetSearchBarActive, SetSearchBarInActive, ResetSearchList, UpdateProductInCart, OpenMobileSideBar, CloseMobileSideBar, RemoveProductFromCart, GetCartProductsFromApi, PurchaseItems, ResetProductsCart } from './shared.action';
 import { defaultProductsCart } from 'src/app/product/product.constants';
 
 
@@ -32,7 +30,9 @@ import { defaultProductsCart } from 'src/app/product/product.constants';
     @Injectable()
     export class SharedState {
 
-        constructor(private sharedService: SharedService, private storageService :StorageService) {}
+        constructor(private sharedService: SharedService,
+                    private alertifyService: AlertifyService
+                    ) {}
 
         @Selector()
         static getSearchList(state: SharedStateModel) {
@@ -228,6 +228,31 @@ import { defaultProductsCart } from 'src/app/product/product.constants';
 
         }
 
+        @Action(PurchaseItems)
+        pruchaseProducts({getState, patchState, dispatch}: StateContext<SharedStateModel>, { cartItems } : PurchaseItems)
+        {
+
+          const state = getState();
+
+          return this.sharedService.purchaseProducts(cartItems)
+                                   .pipe(tap(x =>
+                                    {
+                                      dispatch(new ResetProductsCart());
+                                      this.alertifyService.success("Items purchased successfully")
+                                    }
+                                    ))
+
+        }
+
+        @Action(ResetProductsCart)
+        ResetProductList({getState, patchState}: StateContext<SharedStateModel>)
+        {
+          const state = getState();
+
+          patchState({...state, ProductsCart: defaultProductsCart})
+
+
+        }
 
         @Action(OpenMobileSideBar)
         openMobileSideBar({getState, setState}: StateContext<SharedStateModel>) {

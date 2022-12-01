@@ -1,5 +1,4 @@
-import { ICategory } from './../../category/category.type';
-import { IProduct } from 'src/app/product/product.type';
+import { IAddProductInvoice, IProduct } from 'src/app/product/product.type';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { HttpClient, HttpParams } from '@angular/common/http';
@@ -33,6 +32,14 @@ export class SharedService {
     const productsUsingIdUrl = `${this.productsUrl}/getUsingIds`
 
     return this.httpClient.post<IProduct[]>(productsUsingIdUrl, ids);
+  }
+
+  public purchaseProducts(cartItems: IAddProductInvoice) {
+
+    const addCartItemsURL = `${environment.base_url}Invoices`;
+
+    return this.httpClient.post(addCartItemsURL, cartItems);
+
   }
 
 }

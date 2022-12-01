@@ -35,19 +35,27 @@
 
   </div>
 
-  <div class="second">
-    <p-card>
-      <p class="shopping-card__footer-total-pricing">
-        Subtotal {{ '(' + (cartItemsCount | async)  + ' items): '}}
-        <span class="shopping-card__footer-price">
+  <div class="second" *ngIf="(cartProducts | async) as products">
+    <form (ngSubmit)="onProductsPurchasedSubmit({productInvoiceDetails: products,appUserId: -1 })">
+      <p-card>
+        <p class="shopping-card__footer-total-pricing">
+          Subtotal {{ '(' + (cartItemsCount | async)  + ' items): '}}
+          <span class="shopping-card__footer-price">
           {{ '$' + (cartTotalPrice | async) }}
         </span>
       </p>
-      <button [disabled]="! (loggedUser | async)" class="shopping-card__checkout-button">Checkout</button>
+      <button type="submit"
+              [disabled]="! (loggedUser | async)"
+              class="shopping-card__checkout-button"
+
+              >
+              Checkout
+      </button>
       <p *ngIf="! (loggedUser | async)" class="mt-4">
         Please <a routerLink="/login">sign in </a> first
       </p>
     </p-card>
+    </form>
   </div>
 
 </div>

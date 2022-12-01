@@ -1,4 +1,4 @@
-import { IProductCartItem } from './../../product/product.type';
+import { IAddProductInvoice } from './../../product/product.type';
 import { IProductInvoiceDetails } from "src/app/product/product.type";
 
 export class GlobalSearchInputChanged {
@@ -91,3 +91,18 @@ export class CloseMobileSideBar {
   constructor() {}
 
 }
+
+export class PurchaseItems {
+  static readonly type = '[API Purchase Items]';
+
+  constructor(public cartItems: IAddProductInvoice){}
+}
+
+
+export class ResetProductsCart {
+  static readonly type = '[Shopping-Cart Reset Cart]';
+
+  constructor(){}
+}
+
+
