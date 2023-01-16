@@ -14,8 +14,6 @@ export class CarouselSliderComponent implements  AfterViewInit {
   isPrevButtonActive: boolean = false;
   isNextButtonActive: boolean = false;
 
-
-
   activePhotoIndex: number = 0;
   lastActivePhotoIndex: number = this.activePhotoIndex;
 
@@ -64,7 +62,6 @@ export class CarouselSliderComponent implements  AfterViewInit {
           })
 
   }
-
 
 
 }
