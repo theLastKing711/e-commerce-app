@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ICategory } from '../category.type';
 import { environment } from 'src/environments/environment';
@@ -16,9 +16,13 @@ export class CategoryService implements CategoryService {
 
   getCategories(): Observable<ICategory[]> {
 
-    console.log("testing")
+    const params = new HttpParams().set('pageNumber', 1)
+                                   .set('pageSize', 10)
+                                   .set('query', '-1')
+                                   .set('active', '-1')
+                                   .set('direction', 'asc');
 
-    return this.httpClient.get<ICategory[]>(this.categoryApiUrl);
+    return this.httpClient.get<ICategory[]>(this.categoryApiUrl, {params});
 
   }
 
