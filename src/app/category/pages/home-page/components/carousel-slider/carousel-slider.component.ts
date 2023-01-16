@@ -26,7 +26,8 @@ export class CarouselSliderComponent implements  AfterViewInit {
   @ViewChild("carousel") carousel!: ElementRef<HTMLElement>;
 
   ngAfterViewInit() {
-        const imageHeightInPx = this.elementManiplation.getElementHeightInPx(this.image);
+
+        const imageHeightInPx = this.elementManiplation.getElementHeightInPx(this.image || 200);
         const imageWidth = this.elementManiplation.getElementWidth(this.image);
         const imageBottomOffseInPx = this.elementManiplation.getElementMarginBottomInPx(this.image, 60);
 
@@ -34,34 +35,33 @@ export class CarouselSliderComponent implements  AfterViewInit {
 
 
         this.renderer.setStyle(this.carousel.nativeElement, 'height', imageHeightInPx)
-
-        if(imageWidth >= 768)
-        {
-          this.renderer.setStyle(this.carousel.nativeElement, 'margin-bottom', imageBottomOffseInPx)
-        }
-
-        addEventListener('resize', () =>
-        {
-
-
-          const imageHeightInPx = this.elementManiplation.getElementHeightInPx(this.image);
-          const imageWidth = this.elementManiplation.getElementWidth(this.image);
-          const imageBottomOffseInPx = this.elementManiplation.getElementMarginBottomInPx(this.image, 60);
-
-          console.log("first image", imageHeightInPx)
-
-          this.renderer.setStyle(this.carousel.nativeElement, 'height', imageHeightInPx)
-
           if(imageWidth >= 768)
           {
             this.renderer.setStyle(this.carousel.nativeElement, 'margin-bottom', imageBottomOffseInPx)
           }
-          else
-          {
-            this.renderer.setStyle(this.carousel.nativeElement, 'margin-bottom', "2rem")
-          }
 
-        })
+          addEventListener('resize', () =>
+          {
+
+
+            const imageHeightInPx = this.elementManiplation.getElementHeightInPx(this.image);
+            const imageWidth = this.elementManiplation.getElementWidth(this.image);
+            const imageBottomOffseInPx = this.elementManiplation.getElementMarginBottomInPx(this.image, 60);
+
+            console.log("first image", imageHeightInPx)
+
+            this.renderer.setStyle(this.carousel.nativeElement, 'height', imageHeightInPx)
+
+            if(imageWidth >= 768)
+            {
+              this.renderer.setStyle(this.carousel.nativeElement, 'margin-bottom', imageBottomOffseInPx)
+            }
+            else
+            {
+              this.renderer.setStyle(this.carousel.nativeElement, 'margin-bottom', "2rem")
+            }
+
+          })
 
   }
 
